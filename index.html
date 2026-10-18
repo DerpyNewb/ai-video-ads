@@ -94,7 +94,7 @@ footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line);
       <li><a href="tel:+639294007939">(639)294007939</a></li>
       <li><a href="https://github.com/DerpyNewb">github.com/DerpyNewb</a></li>
     </ul>
-    <p class="intro">Eight spec ads in three shapes: 16:9 for YouTube, Facebook and the web; 9:16 for Reels and Stories; and square for the feed. The first four show the product in live action. The rest try different styles: stop-motion clay, a creator-style phone video, a short story with dialogue, and a 1990s TV spot. Under each are the problems the review found and what was done about them.</p>
+    <p class="intro">Eight spec ads in three shapes: 16:9 for YouTube, Facebook and the web; 9:16 for Reels and Stories; and square for the feed. The first four show the product in live action. The rest try different styles: stop-motion clay, a creator-style phone video, a short story with dialogue, and a 1990s TV spot. Under each are the problems found and what was done about them.</p>
   </header>
 
   <main class="ads">
@@ -213,14 +213,14 @@ footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line);
         <p class="spec"><span class="shape wide" aria-hidden="true"></span>20 seconds · 16:9 · YouTube and Facebook</p>
         <p>A short story with dialogue: a grandmother and her grandson on a rainy afternoon in Baguio, both AI-generated. Veo 3.1 Fast voiced every line in the clips, and there is no added voiceover or music.</p>
         <ul>
-          <li>The pouring shot runs six seconds, longer than the rest, because "Hot water" came four seconds after "One spoonful".</li>
+          <li>Veo put a third hand in the pouring shot, and the review missed it: it looked at about one frame a second. The second take did the same once the kettle came in. The shot now ends on the spoonful, before the kettle, and "Hot water" is gone.</li>
           <li>In the last shot Veo added two lines that weren't in the script. They stayed: "It'll warm you up" is what the brief wanted the ad to say, and it makes no health claim.</li>
         </ul>
         <details>
           <summary>Dialogue</summary>
           <ol>
             <li>Soaked again? Sit.</li>
-            <li>One spoonful. Hot water.</li>
+            <li>One spoonful.</li>
             <li>Better than my jacket.</li>
             <li>Smells good, Lola.</li>
             <li>It'll warm you up, Apo.</li>
@@ -259,7 +259,7 @@ footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line);
       <li>A coding agent turns the brief into a shot list, with one subject and one camera move per shot, and never asks the video model for on-screen text, which it garbles. A script checks the shot list against those rules and writes the prompts.</li>
       <li>Veo 3.1 in Google Flow, or Gemini Omni in the Gemini app, generates each shot, with a still of the product or the people attached so they look the same in every shot. When Veo speaks a line itself, a Whisper transcript gives each word's timing, so every cut lands between words.</li>
       <li>The script rejects clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip.</li>
-      <li>Claude Code reviews every clip frame by frame for hands, faces, garbled text, objects that change shape and physics that look wrong, and records it as an AI review.</li>
+      <li>Claude Code reviews frames from every clip for hands, faces, garbled text, objects that change shape and physics that look wrong, and records it as an AI review.</li>
       <li>The script grades the clips, sets the titles and levels the sound. DaVinci Resolve renders the edit, and each ad ships with a record that marks it AI-generated.</li>
     </ol>
   </section>
