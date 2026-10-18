@@ -5,87 +5,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, AI video ads</title>
 <meta name="description" content="Four spec video ads made with Google Veo and Gemini Omni and finished in DaVinci Resolve, for YouTube, Reels and Stories, and feed posts.">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-/* Same type and colours as the pipeline's diagram page (ad-video-workflow/docs/workflow.html). */
+/* Direction and the reason for each choice: DESIGN.md. */
 :root {
-  --bg: #eef2f3; --surface: #fbfcfc; --fg: #172126; --muted: #56656c;
-  --line: #b9c6cb; --accent: #1d6b57; --frame: #172126;
-  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --paper: #f5efe6; --ink: #2b2520; --muted: #6a5d52; --line: #d8cdbf; --accent: #97441f; --frame: #2b2520;
+  --serif: "Source Serif 4", Constantia, Georgia, serif;
+  --sans: "Source Sans 3", Corbel, "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1517; --surface: #172024; --fg: #e2e9eb; --muted: #90a1a8;
-    --line: #3a4950; --accent: #62c4a6; --frame: #000; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1517; --surface: #172024; --fg: #e2e9eb; --muted: #90a1a8;
-  --line: #3a4950; --accent: #62c4a6; --frame: #000; color-scheme: dark;
+  :root { --paper: #1c1815; --ink: #eee6da; --muted: #b3a596; --line: #3d352e; --accent: #e39466; --frame: #0f0d0b; color-scheme: dark; }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--body); }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.65 var(--serif); }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible, video:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .wrap {
-  max-width: 1120px; margin: 0 auto; padding-block: 48px 56px;
+  max-width: 1120px; margin: 0 auto; padding-block: 72px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: .01em; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1; }
-h2 { font-size: clamp(28px, 4vw, 34px); line-height: 1.05; }
-h3 { font-size: 22px; line-height: 1.1; }
+h1, h2 { font-weight: 600; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(44px, 7.5vw, 80px); line-height: 1; letter-spacing: -.015em; }
+h2 { font-size: clamp(28px, 3.6vw, 38px); line-height: 1.1; letter-spacing: -.005em; }
 p { margin: 0; }
-header { display: grid; gap: 14px; }
-.tagline, .intro { max-width: 66ch; }
-.tagline { font-size: clamp(18px, 2.2vw, 21px); }
-.contact { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; padding: 0; list-style: none;
-  font: 14px/1.5 var(--mono); color: var(--muted); }
-.contact a, footer a { display: inline-block; padding-block: 12px; }
+header { display: grid; gap: 18px; }
+.tagline { font-size: clamp(20px, 2.4vw, 25px); line-height: 1.4; font-style: italic; max-width: 34ch; }
+.contact { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 0; padding: 0; list-style: none;
+  font: 15px/1.5 var(--sans); color: var(--muted); }
 .contact li { display: flex; align-items: center; }
-.intro { color: var(--muted); }
+.contact a, footer a { display: inline-block; padding-block: 12px; }
+.intro { color: var(--muted); max-width: 60ch; margin-top: 8px; }
 
-.ads { display: grid; gap: 72px; margin-top: 64px; }
-.ad { display: grid; gap: 20px 40px; align-items: start; }
+.ads { display: grid; gap: 104px; margin-top: 88px; }
+.ad { display: grid; gap: 24px 48px; align-items: start; }
 .ad.wide { grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); }
 .ad.tall { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); }
 .ad.square { grid-template-columns: minmax(0, 500px) minmax(0, 1fr); }
-video { display: block; width: 100%; height: auto; background: var(--frame); border-radius: 6px; }
+video { display: block; width: 100%; height: auto; background: var(--frame); border-radius: 4px; }
 .tall video { border: 6px solid var(--frame); border-radius: 18px; }
-.about { display: grid; gap: 12px; align-content: start; max-width: 62ch; }
-.meta { font: 14px/1.4 var(--mono); color: var(--muted); }
-.about h2 { margin-top: 6px; }
-ul, ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
-details { border-top: 1px solid var(--line); padding-top: 10px; }
-summary { cursor: pointer; font-weight: 500; padding-block: 6px; }
-details ol { margin-top: 8px; color: var(--muted); }
+.about { display: grid; gap: 14px; align-content: start; max-width: 60ch; }
+.spec { display: flex; align-items: center; gap: 10px; font: 15px/1.4 var(--sans); color: var(--muted); }
+/* Each ad's frame shape, drawn small: the three formats are the page's repeated mark. */
+.shape { flex: none; border: 1.5px solid var(--accent); border-radius: 1px; }
+.shape.wide { width: 23px; height: 13px; }
+.shape.tall { width: 10px; height: 17px; }
+.shape.square { width: 15px; height: 15px; }
+ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+details { border-top: 1px solid var(--line); }
+summary { cursor: pointer; font: 600 15px/1.5 var(--sans); padding-block: 11px; }
+details ol { margin: 0 0 8px; padding-left: 22px; display: grid; gap: 4px; color: var(--muted); font-style: italic; }
 
-.process { margin-top: 88px; padding-top: 40px; border-top: 1px solid var(--line); display: grid; gap: 24px; }
-.steps { list-style: none; padding: 0; counter-reset: step; display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
-.steps li { counter-increment: step; display: grid; gap: 4px; align-content: start; }
-.steps li::before { content: counter(step, decimal-leading-zero); font: 500 14px var(--mono); color: var(--accent); }
-.steps p { color: var(--muted); }
+.process { margin-top: 120px; padding-top: 48px; border-top: 1px solid var(--line); display: grid; gap: 28px; }
+.steps { margin: 0; padding-left: 22px; columns: 2; column-gap: 56px; }
+.steps li { break-inside: avoid; margin-bottom: 18px; padding-left: 4px; }
+.steps li::marker { color: var(--muted); }
 
-footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); display: grid; gap: 6px; font-size: 15px; }
+footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted);
+  display: grid; gap: 0; font: 15px/1.6 var(--sans); }
 
 @media (max-width: 900px) {
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ad.wide, .ad.square { grid-template-columns: minmax(0, 1fr); }
   .ad.square video { max-width: 560px; }
 }
 @media (max-width: 640px) {
-  .wrap { padding-block: 32px 40px; }
-  .ads { gap: 56px; margin-top: 44px; }
+  body { font-size: 16px; }
+  .wrap { padding-block: 40px 40px; }
+  .ads { gap: 64px; margin-top: 52px; }
   .ad.tall { grid-template-columns: minmax(0, 1fr); }
   .ad.tall video { max-width: 300px; }
-  .steps { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .process { margin-top: 64px; }
+  .steps { columns: 1; }
+  .process { margin-top: 72px; padding-top: 36px; }
+  footer { margin-top: 56px; }
 }
 </style>
 </head>
@@ -100,19 +94,19 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
       <li><a href="tel:+639294007939">(639)294007939</a></li>
       <li><a href="https://github.com/DerpyNewb">github.com/DerpyNewb</a></li>
     </ul>
-    <p class="intro">Four spec ads, each built for a different place: a 30-second spot for YouTube, a 15-second spot, a 9:16 ad for Reels and Stories, and a square feed post. Under each is what went wrong in the raw footage and how the edit dealt with it.</p>
+    <p class="intro">Four spec ads in three shapes: two 16:9 spots for YouTube and the web, a 9:16 ad for Reels and Stories, and a square feed post. Under each are the problems the review found and how the edit fixed them.</p>
   </header>
 
   <main class="ads">
     <article class="ad wide" aria-labelledby="mistline">
       <video src="media/mistline.mp4" poster="media/mistline.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Mistline Coffee ad, 30 seconds"></video>
       <div class="about">
-        <p class="meta">30 s · 16:9 · YouTube and web</p>
         <h2 id="mistline">Mistline Coffee</h2>
-        <p>Seven Veo 3.1 Fast clips from Google Flow, each starting from an approved still so the bag and the light match from shot to shot. Voiceover by Gemini TTS, graded with a custom misty-morning LUT and finished in DaVinci Resolve.</p>
+        <p class="spec"><span class="shape wide" aria-hidden="true"></span>30 seconds · 16:9 · YouTube and the web</p>
+        <p>Seven Veo 3.1 Fast clips from Google Flow, each starting from an approved still so the bag and the light match from shot to shot. Gemini TTS reads the voiceover, a colour grade gives every shot the same misty-morning look, and DaVinci Resolve renders the cut.</p>
         <ul>
-          <li>An arm crosses the frame in the coffee-picking shot. Stepped through at 4 frames a second, it stays one arm, and every hand keeps five fingers.</li>
-          <li>Veo's own sound had a snap that peaked near full scale over the voice. Clip sound now sits under the voice at a fixed level.</li>
+          <li>An arm crosses the frame in the coffee-picking shot. Claude Code stepped through it at 4 frames a second: it stays one arm, and every hand keeps five fingers.</li>
+          <li>Veo's own sound included a loud snap that jumped over the voice, so the mix turns the clip sound down under the voice.</li>
         </ul>
         <details>
           <summary>Voiceover</summary>
@@ -130,13 +124,13 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
     <article class="ad wide" aria-labelledby="lumaro">
       <video src="media/lumaro.mp4" poster="media/lumaro.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Lumaro Sparkling Calamansi ad, 15 seconds"></video>
       <div class="about">
-        <p class="meta">15 s · 16:9 · YouTube and web</p>
         <h2 id="lumaro">Lumaro Sparkling Calamansi</h2>
-        <p>Four Gemini Omni clips made in the Gemini app, three with the same product still so the can stays the same. Voiceover by Gemini TTS, finished in DaVinci Resolve.</p>
+        <p class="spec"><span class="shape wide" aria-hidden="true"></span>15 seconds · 16:9 · YouTube and the web</p>
+        <p>Four Gemini Omni clips made in the Gemini app, three with the same product still so the can looks the same throughout. Gemini TTS reads the voiceover and DaVinci Resolve renders the cut.</p>
         <ul>
-          <li>Omni sometimes cuts to a new angle inside a clip. Each shot uses only a stretch without a cut.</li>
+          <li>Omni sometimes cuts to a new angle partway through a clip, so each shot uses only a stretch without a cut.</li>
           <li>At the tab pop the can shrinks by about a fifth, so that shot ends on the crack.</li>
-          <li>The first super, "Made with real calamansi juice.", ran across the can. It became "Real calamansi."</li>
+          <li>The first on-screen line, "Made with real calamansi juice.", ran across the can, so Claude Code shortened it to "Real calamansi."</li>
         </ul>
         <details>
           <summary>Voiceover</summary>
@@ -152,11 +146,11 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
     <article class="ad tall" aria-labelledby="kalan">
       <video src="media/kalan.mp4" poster="media/kalan.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Kalan Chili Garlic Crisp ad, 12 seconds, vertical"></video>
       <div class="about">
-        <p class="meta">12 s · 9:16 for Reels and Stories, plus a 4:5 cut for Feed</p>
         <h2 id="kalan">Kalan Chili Garlic Crisp</h2>
-        <p>Five Veo 3.1 Fast clips from Google Flow, with a jar still made in Flow so the jar matches. Cut for a feed: something moves in the first frame, the brand is on screen by 2 seconds, and there's a cut every 2 to 3 seconds. It works muted, with Veo's sizzle and crunch as the sound.</p>
+        <p class="spec"><span class="shape tall" aria-hidden="true"></span>12 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
+        <p>Five Veo 3.1 Fast clips from Google Flow, with a jar still made in Flow so the jar looks the same throughout. Paced for a feed: something moves in the first frame, the brand is on screen by 2 seconds, and there's a cut every 2 to 3 seconds. It works with the sound off, and Veo's sizzle and crunch are the soundtrack.</p>
         <ul>
-          <li>Captions stay out of the top 14% and bottom 35% of the frame, where Reels and Stories put the account name and buttons, and inside the 4:5 middle that Feed shows.</li>
+          <li>Captions stay out of the top 14% and bottom 35% of the frame, where Reels and Stories put the account name and buttons, and inside the middle part that Facebook Feed shows.</li>
           <li>In the spoon shot the jar loses its lid with no one touching it, so the edit uses a later stretch of that clip.</li>
         </ul>
       </div>
@@ -165,13 +159,13 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
     <article class="ad square" aria-labelledby="dapit">
       <video src="media/dapit.mp4" poster="media/dapit.jpg" width="1080" height="1080" muted loop playsinline controls preload="none" aria-label="Dapit Soy Candles ad, 12 seconds, square"></video>
       <div class="about">
-        <p class="meta">12 s · 1:1 · Facebook and Instagram feed</p>
         <h2 id="dapit">Dapit Soy Candles</h2>
-        <p>Veo makes only wide and tall video, so the four clips were generated wide with the candle in the centre and cut to the middle square. Slower than the Reels ad, with four 3-second shots. The only sound is the candle's crackle.</p>
+        <p class="spec"><span class="shape square" aria-hidden="true"></span>12 seconds · 1:1 · Facebook and Instagram feed</p>
+        <p>Veo makes only wide and tall video, so it generated the four clips wide with the candle in the centre, and the edit keeps the middle square. Slower than the Reels ad, with four 3-second shots. The only sound is the candle's crackle.</p>
         <ul>
           <li>In the opening shot the match arrived already burnt out, and the flame lit before it touched the wick, so the edit uses the steady flame after it.</li>
-          <li>The third shot's first take had a thicker wick than the first shot. It was generated again to match.</li>
-          <li>The first supers were white on cream wax and hard to read. They now sit on a soft dark gradient.</li>
+          <li>The third shot's first take had a thicker wick than the first shot, so Veo generated it again from a corrected prompt.</li>
+          <li>White titles on the cream wax were hard to read, so they now sit on a soft dark gradient.</li>
         </ul>
       </div>
     </article>
@@ -180,12 +174,12 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
   <section class="process" aria-labelledby="process">
     <h2 id="process">How each ad is made</h2>
     <ol class="steps">
-      <li><h3>Brief</h3><p>One page on the product, the audience and the claims the ad may make.</p></li>
-      <li><h3>Shot list</h3><p>One subject and one camera move per shot, and no on-screen text asked of the model, which garbles it. A script checks the rules and writes the prompts.</p></li>
-      <li><h3>Generate</h3><p>Veo 3.1 in Google Flow or Gemini Omni in the Gemini app, with a product still attached so the product matches across shots.</p></li>
-      <li><h3>Check</h3><p>A script rejects clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip.</p></li>
-      <li><h3>Review</h3><p>Each clip is checked frame by frame for hands, faces, garbled text, objects that change shape and physics that look wrong. For these four, Claude Code did that review, and it is recorded as an AI review.</p></li>
-      <li><h3>Finish</h3><p>The script grades the clips, sets the titles and levels the sound. DaVinci Resolve does the edit and the render, and each ad ships with a record that marks it AI-generated.</p></li>
+      <li>Each ad starts from a one-page brief: the product, the audience, and the claims the ad may make.</li>
+      <li>A coding agent turns the brief into a shot list, with one subject and one camera move per shot, and never asks the video model for on-screen text, which it garbles. A script checks the shot list against those rules and writes the prompts.</li>
+      <li>Veo 3.1 in Google Flow, or Gemini Omni in the Gemini app, generates each shot, with a still of the product attached so it looks the same in every shot.</li>
+      <li>The script rejects clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip.</li>
+      <li>Claude Code reviews every clip frame by frame for hands, faces, garbled text, objects that change shape and physics that look wrong, and records it as an AI review.</li>
+      <li>The script grades the clips, sets the titles and levels the sound. DaVinci Resolve renders the edit, and each ad ships with a record that marks it AI-generated.</li>
     </ol>
   </section>
 
@@ -195,13 +189,18 @@ footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
   </footer>
 </div>
 <script>
-// Play each ad muted while it's on screen, as a feed would, and pause it once it scrolls away.
+// Play each ad muted while it's on screen, as a feed would. A video the viewer pauses stays paused.
 const quiet = matchMedia('(prefers-reduced-motion: reduce)');
+const held = new WeakSet();
 const watch = new IntersectionObserver(entries => entries.forEach(({ target, isIntersecting }) => {
-  if (isIntersecting && !quiet.matches) target.play().catch(() => {});
-  else if (!isIntersecting) target.pause();
+  if (isIntersecting && !quiet.matches && !held.has(target)) target.play().catch(() => {});
+  else if (!isIntersecting && !target.paused) { target.dataset.auto = '1'; target.pause(); }
 }), { threshold: 0.6 });
-document.querySelectorAll('video').forEach(video => watch.observe(video));
+document.querySelectorAll('video').forEach(video => {
+  video.addEventListener('pause', () => { if (video.dataset.auto) delete video.dataset.auto; else held.add(video); });
+  video.addEventListener('play', () => held.delete(video));
+  watch.observe(video);
+});
 </script>
 </body>
 </html>
