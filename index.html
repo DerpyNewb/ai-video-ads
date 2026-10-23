@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, AI video ads</title>
-<meta name="description" content="Eight spec video ads for YouTube, Reels and Stories, and the feed. Google Veo and Gemini Omni made the clips, Flow Music made the music, and DaVinci Resolve put it all together.">
+<meta name="description" content="Eight spec video ads for YouTube, Reels and Stories, and the feed, and a series of five wellness Reels. Google Veo and Gemini Omni made the clips, Flow Music made the music, and DaVinci Resolve put it all together.">
 <meta name="theme-color" content="#18191b">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,8 @@ h2, h3 { font-size: var(--step-head); }
 .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: var(--m); min-height: 100svh; }
 .card { background: var(--paper); color: var(--paper-ink); display: flex; flex-direction: column; text-align: center; }
 .card .cut { height: 56px; gap: 6px; margin: 12px 12px 0; }
-.card .cut span { display: flex; flex: var(--s) 1 0%; }
+/* A band that runs several ads groups each one's shots in a span, at the ad's total length. */
+.cut span { display: flex; flex: var(--s) 1 0%; }
 .card-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 56px clamp(20px, 4vw, 64px); }
 .wordmark { font-size: var(--step-lead); line-height: 1; }
 .card-body > p:not(.wordmark) { max-width: 30ch; font-size: var(--step-lead); line-height: 1.35; }
@@ -103,6 +104,19 @@ details { margin-top: 8px; background: var(--paper-shade); }
 summary { cursor: pointer; min-height: 44px; padding: 10px 16px; font-weight: 600; transition: background .15s ease-out; }
 summary:hover { background: #d3d5d9; }
 details ol { margin: 0; padding: 0 16px 14px 40px; display: grid; gap: 4px; }
+/* A series: one sheet, one player, and a list of its Reels; picking one loads it into the player. The tab carries
+   one 9:16 mark per Reel, and the sheet's band runs every Reel's edit. */
+.series .tab { gap: 5px; }
+.series .paper > .cut { gap: 6px; }
+.reels { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.reels a { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 8px 16px; min-height: 44px; padding: 10px 16px 12px; background: var(--paper-shade); font-weight: 600; text-decoration: none; transition: background .15s ease-out; }
+.reels a:hover { background: #d3d5d9; }
+.reels small { font-size: var(--step-small); font-weight: 400; color: var(--paper-muted); }
+.reels .cut { grid-column: 1 / -1; height: 8px; }
+/* The Reel in the player is printed in reverse, so the one choice that's made reads at a glance. */
+.reels a[aria-current] { background: var(--paper-ink); color: var(--paper); }
+.reels a[aria-current] small { color: var(--paper-shade); }
+.reels a[aria-current] .cut i:nth-child(odd) { background: var(--paper); }
 
 /* How it's made: the run printed as a slip, on a lighter graphite field. */
 .process { margin-top: clamp(96px, 10vw, 160px); padding: clamp(56px, 6vw, 96px) 0; background: var(--field); }
@@ -201,8 +215,8 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
     <div class="card-body">
       <p class="wordmark">Yohann Mar Gayao</p>
       <h1>AI video ads</h1>
-      <p>Eight spec ads for brands that don't exist. Each one starts from a one&#8209;page brief and gets finished in DaVinci Resolve.</p>
-      <a class="button" href="#ads">Watch the eight ads</a>
+      <p>Eight spec ads for brands that don't exist, and five Reels for a wellness page that doesn't either. Each one starts from a one&#8209;page brief and gets finished in DaVinci Resolve.</p>
+      <a class="button" href="#ads">Watch the ads</a>
     </div>
     <nav aria-label="On this page">
       <a href="#process">How they're made</a>
@@ -221,8 +235,8 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
 <main>
   <section class="ads" id="ads" aria-labelledby="ads-h">
     <div class="ads-head">
-      <h2 id="ads-h" class="rise">The eight ads</h2>
-      <p class="rise">Three shapes: 16:9 for YouTube and the web, 9:16 for Reels and Stories, and square for the feed. The first four show off the product in live action, and the other four play with style. They all have music, but they start muted, so turn the sound on. The bar across each sheet is its edit: one block per shot, at its real length.</p>
+      <h2 id="ads-h" class="rise">The ads</h2>
+      <p class="rise">Three shapes: 16:9 for YouTube and the web, 9:16 for Reels and Stories, and square for the feed. The first four show off the product in live action, and the next four play with style. Last comes a series: five how-to Reels for one wellness page, on a single sheet. They all have music, but they start muted, so turn the sound on. The bar across each sheet is its edit: one block per shot, at its real length.</p>
     </div>
 
     <div class="sheets">
@@ -517,6 +531,56 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
           </div>
         </div>
       </article>
+
+      <article class="sheet tall series" aria-labelledby="sigla">
+        <div class="tab" aria-hidden="true"><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span></div>
+        <div class="paper">
+          <h3 id="sigla" class="rise">Sigla Wellness</h3>
+          <p class="spec">A series of five Reels, 30 to 90 seconds · 9:16 for Reels and Stories, with 4:5 cuts for Feed</p>
+          <div class="cut" role="img" aria-label="The edits of the five Reels, one after another: 42 shots, 255 seconds in all">
+            <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i></span>
+            <span style="--s:45"><i style="--s:5"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:5"></i></span>
+            <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:4"></i><i style="--s:5"></i></span>
+            <span style="--s:90"><i style="--s:9.25"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5.75"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5"></i><i style="--s:10"></i><i style="--s:7.5"></i></span>
+            <span style="--s:60"><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:4"></i></span>
+          </div>
+          <div class="body">
+            <video id="sigla-player" class="rise" src="media/sigla-breathing.mp4" poster="media/sigla-breathing.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Sigla Wellness, box breathing Reel, 30 seconds, vertical"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>A wellness page from Baguio posts short how-to Reels for people who follow health content on their phones. Each one shows one everyday habit, a step per shot, and makes no health claims: no cures, no calories, no hours of sleep.</p>
+              <h4>The five Reels</h4>
+              <ol class="reels">
+                <li><a href="media/sigla-breathing.mp4" aria-current="true" data-poster="media/sigla-breathing.jpg" data-label="Sigla Wellness, box breathing Reel, 30 seconds, vertical">Box breathing <small>30 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i></span></a></li>
+                <li><a href="media/sigla-desk.mp4" data-poster="media/sigla-desk.jpg" data-label="Sigla Wellness, desk stretch Reel, 45 seconds, vertical">A stretch break at the desk <small>45 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:5"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:5"></i></span></a></li>
+                <li><a href="media/sigla-water.mp4" data-poster="media/sigla-water.jpg" data-label="Sigla Wellness, water Reel, 30 seconds, vertical">Water you'll actually drink <small>30 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:4"></i><i style="--s:5"></i></span></a></li>
+                <li><a href="media/sigla-wind-down.mp4" data-poster="media/sigla-wind-down.jpg" data-label="Sigla Wellness, evening wind-down Reel, 90 seconds, vertical">Winding down at night <small>90 s · 12 shots</small><span class="cut" aria-hidden="true"><i style="--s:9.25"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5.75"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5"></i><i style="--s:10"></i><i style="--s:7.5"></i></span></a></li>
+                <li><a href="media/sigla-walk.mp4" data-poster="media/sigla-walk.jpg" data-label="Sigla Wellness, morning walk Reel, 60 seconds, vertical">A walk before the phone <small>60 s · 9 shots</small><span class="cut" aria-hidden="true"><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:4"></i></span></a></li>
+              </ol>
+              <h4>How it was made</h4>
+              <p>Most clips are Veo 3.1 Lite from Google Flow, each started from a Nano Banana still so the person, or the pitcher, looks the same in every shot. Flow's credits ran out after 38 clips, so Gemini Omni made the shots that need no still in the Gemini app, about five every five hours. Nobody talks: a caption carries each step, so it all works with the sound off.</p>
+              <figure class="stills">
+                <figcaption>The five stills, made by Nano Banana 2.1 in Flow, one for each Reel.</figcaption>
+                <div>
+                  <a href="media/stills/sigla-breathing.jpg"><img src="media/stills/sigla-breathing-thumb.jpg" width="280" height="502" loading="lazy" alt="A woman in an oatmeal sweater sitting cross-legged on a wooden porch among pines"></a>
+                  <a href="media/stills/sigla-desk.jpg"><img src="media/stills/sigla-desk-thumb.jpg" width="280" height="502" loading="lazy" alt="A man in a navy T-shirt sitting at a wooden desk by a window"></a>
+                  <a href="media/stills/sigla-water.jpg"><img src="media/stills/sigla-water-thumb.jpg" width="280" height="502" loading="lazy" alt="A tall glass pitcher of water with cucumber, mint and calamansi"></a>
+                  <a href="media/stills/sigla-wind-down.jpg"><img src="media/stills/sigla-wind-down-thumb.jpg" width="280" height="502" loading="lazy" alt="A woman in grey pyjamas standing in a lamplit wooden bedroom"></a>
+                  <a href="media/stills/sigla-walk.jpg"><img src="media/stills/sigla-walk-thumb.jpg" width="280" height="502" loading="lazy" alt="A woman in a green jacket standing on a cabin porch among misty pines"></a>
+                </div>
+              </figure>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>All five end on the same sunrise over the ridges. Played forward, the camera drifted a pine tree right through the page name, so the picture plays backwards. The wind and birds still run forwards.</li>
+                <li>In the tea shot, Gemini Omni moved the kettle from one side of the mug to the other in the middle of the pour. The wind-down Reel picks the shot up after the jump.</li>
+                <li>The bedside lamp goes out, then the room lights itself back up. That shot ends while it's still dark.</li>
+                <li>An ice cube dives into the glass and the rest jump around, so the water Reel's first shot starts once they settle.</li>
+                <li>Flow Music's stem split put something in the vocal stem for the first 15 seconds of the breathing track. It's most likely the soft pad split in two, but nobody has listened to check, so that Reel uses the track from 16 seconds on.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -524,7 +588,7 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
     <div class="process-grid">
       <div class="process-head">
         <h2 id="process-h" class="rise">How each ad gets made</h2>
-        <p class="rise">The same run for all eight, from a one&#8209;page brief to a render in DaVinci Resolve. The right-hand column names the tool or model that does each step.</p>
+        <p class="rise">The same run for every video here, from a one&#8209;page brief to a render in DaVinci Resolve. The right-hand column names the tool or model that does each step.</p>
       </div>
       <div class="slip rise">
         <h3>The brief</h3>
@@ -550,7 +614,7 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
           <div><dt>The grade, the titles and the sound mix, with the music under any voice and up front when nobody's talking</dt><dd>The script</dd></div>
           <div><dt>The render</dt><dd>DaVinci Resolve</dd></div>
         </dl>
-        <p class="total"><span>Each ad, with a manifest that marks it as AI-generated and records each shot's prompt</span><span>8 ads</span></p>
+        <p class="total"><span>Each ad, with a manifest that marks it as AI-generated and records each shot's prompt</span><span>8 ads, 5 Reels</span></p>
       </div>
     </div>
   </section>
@@ -610,6 +674,17 @@ document.querySelectorAll('video').forEach(video => {
   video.addEventListener('play', () => held.delete(video));
   watch.observe(video);
 });
+
+// The series sheet has one player: picking a Reel loads it there and plays it. Without the script, each link opens its file.
+const player = document.getElementById('sigla-player');
+document.querySelectorAll('.reels a').forEach(link => link.addEventListener('click', event => {
+  event.preventDefault();
+  document.querySelector('.reels [aria-current]')?.removeAttribute('aria-current');
+  link.setAttribute('aria-current', 'true');
+  Object.assign(player, { poster: link.dataset.poster, src: link.href });
+  player.setAttribute('aria-label', link.dataset.label);
+  player.play().catch(() => {});
+}));
 
 // Each part rises in once as it arrives. .js goes on here, so without the script nothing starts hidden.
 document.documentElement.classList.add('js');
