@@ -5,272 +5,598 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yohann Mar Gayao, AI video ads</title>
 <meta name="description" content="Eight spec video ads for YouTube, Reels and Stories, and the feed. Google Veo and Gemini Omni made the clips, Flow Music made the music, and DaVinci Resolve put it all together.">
+<meta name="theme-color" content="#18191b">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 <style>
 /* Direction and the reason for each choice: DESIGN.md. */
 :root {
-  --paper: #f5efe6; --ink: #2b2520; --muted: #6a5d52; --line: #d8cdbf; --accent: #97441f; --frame: #2b2520;
-  --serif: "Source Serif 4", Constantia, Georgia, serif;
-  --sans: "Source Sans 3", Corbel, "Segoe UI", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --paper: #1c1815; --ink: #eee6da; --muted: #b3a596; --line: #3d352e; --accent: #e39466; --frame: #0f0d0b; color-scheme: dark; }
+  --bg: #18191b; --ink: #eff0f1; --field: #222427;
+  --paper: #eff0f1; --paper-ink: #18191b; --paper-muted: #5b5e64; --paper-shade: #dfe1e4;
+  --orange: #f24a1c;
+  --ring: var(--paper-ink);
+  --m: clamp(16px, 2.2vw, 32px);
+  --inner: min(100% - 2 * var(--m), 1376px);
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
+  --step-display: clamp(3.25rem, 1rem + 6.4vw, 6.5rem);
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.65 var(--serif); }
-a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, video:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.wrap {
-  max-width: 1120px; margin: 0 auto; padding-block: 72px 64px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-h1, h2 { font-weight: 600; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(44px, 7.5vw, 80px); line-height: 1; letter-spacing: -.015em; }
-h2 { font-size: clamp(28px, 3.6vw, 38px); line-height: 1.1; letter-spacing: -.005em; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--step-body)/1.5 "Archivo", system-ui, sans-serif; }
+p, li, dt, figcaption { text-wrap: pretty; }
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; transition: text-decoration-thickness .15s ease-out; }
+a:hover { text-decoration-thickness: 3px; }
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 p { margin: 0; }
-header { display: grid; gap: 18px; }
-.tagline { font-size: clamp(20px, 2.4vw, 25px); line-height: 1.4; font-style: italic; max-width: 34ch; }
-.contact { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 0; padding: 0; list-style: none;
-  font: 15px/1.5 var(--sans); color: var(--muted); }
-.contact li { display: flex; align-items: center; }
-.contact a, footer a { display: inline-block; padding-block: 12px; }
-.intro { color: var(--muted); max-width: 60ch; margin-top: 8px; }
+h1, h2, h3, .wordmark { margin: 0; font-stretch: 62%; font-weight: 800; text-transform: uppercase; line-height: .86; letter-spacing: -.01em; text-wrap: balance; }
+h1 { font-size: var(--step-display); }
+h2, h3 { font-size: var(--step-head); }
 
-.ads { display: grid; gap: 104px; margin-top: 88px; }
-.ad { display: grid; gap: 24px 48px; align-items: start; }
-.ad.wide { grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); }
-.ad.tall { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); }
-.ad.square { grid-template-columns: minmax(0, 500px) minmax(0, 1fr); }
-video { display: block; width: 100%; height: auto; background: var(--frame); border-radius: 4px; }
-.tall video { border: 6px solid var(--frame); border-radius: 18px; }
-.about { display: grid; gap: 14px; align-content: start; max-width: 60ch; }
-.spec { display: flex; align-items: center; gap: 10px; font: 15px/1.4 var(--sans); color: var(--muted); }
-/* Each ad's frame shape, drawn small: the three formats are the page's repeated mark. */
-.shape { flex: none; border: 1.5px solid var(--accent); border-radius: 1px; }
-.shape.wide { width: 23px; height: 13px; }
+/* The edit of an ad, drawn to scale: one block per shot, its width the shot's length in seconds. */
+.cut { display: flex; height: 28px; }
+.cut i { flex: var(--s) 1 0%; background: var(--paper-ink); }
+.cut i:nth-child(even) { background: var(--orange); }
+
+/* First screen: a printed card beside the ads' opening frames. */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: var(--m); min-height: 100svh; }
+.card { background: var(--paper); color: var(--paper-ink); display: flex; flex-direction: column; text-align: center; }
+.card .cut { height: 56px; gap: 6px; margin: 12px 12px 0; }
+.card .cut span { display: flex; flex: var(--s) 1 0%; }
+.card-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 56px clamp(20px, 4vw, 64px); }
+.wordmark { font-size: var(--step-lead); line-height: 1; }
+.card-body > p:not(.wordmark) { max-width: 30ch; font-size: var(--step-lead); line-height: 1.35; }
+.button { display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; background: var(--orange); color: var(--paper-ink); font-weight: 600; text-decoration: none; transition: background .15s ease-out, color .15s ease-out, translate .15s ease-out; }
+.button:hover { background: var(--paper-ink); color: var(--paper); }
+.button:active { translate: 0 1px; }
+.card nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 28px; padding: 0 20px 16px; font-size: var(--step-small); }
+.card nav a { display: inline-block; padding: 13px 4px; }
+.pics { position: sticky; top: var(--m); height: calc(100svh - 2 * var(--m)); display: grid; overflow: hidden; background: var(--paper-ink); }
+.pics img { grid-area: 1 / 1; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.pics img:first-child { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .pics img { animation: crossfade 24s infinite backwards; }
+  .pics img:nth-child(1) { animation-delay: -1.6s; }
+  .pics img:nth-child(2) { animation-delay: 4.4s; }
+  .pics img:nth-child(3) { animation-delay: 10.4s; }
+  .pics img:nth-child(4) { animation-delay: 16.4s; }
+}
+@keyframes crossfade { 0% { opacity: 0; } 6.7% { opacity: 1; } 25% { opacity: 1; } 31.7% { opacity: 0; } 100% { opacity: 0; } }
+
+/* The ads: one production sheet each, a paper panel with a folder tab. */
+.ads { width: var(--inner); margin: clamp(120px, 14vw, 220px) auto 0; }
+.ads-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px 48px; margin-bottom: clamp(48px, 6vw, 80px); }
+.ads-head p { max-width: 56ch; }
+.sheets { display: grid; gap: clamp(72px, 8vw, 120px); }
+.tab { display: inline-flex; align-items: center; height: 44px; margin-bottom: -1px; padding: 6px 48px 0 20px; background: var(--paper); clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 100%, 0 100%); }
+.shape { flex: none; background: var(--paper-ink); }
+.shape.wide { width: 22px; height: 12px; }
 .shape.tall { width: 10px; height: 17px; }
-.shape.square { width: 15px; height: 15px; }
-ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
-details { border-top: 1px solid var(--line); }
-summary { cursor: pointer; font: 600 15px/1.5 var(--sans); padding-block: 11px; }
-details ol { margin: 0 0 8px; padding-left: 22px; display: grid; gap: 4px; color: var(--muted); font-style: italic; }
+.shape.square { width: 14px; height: 14px; }
+.paper { --pad: clamp(20px, 3vw, 44px); background: var(--paper); color: var(--paper-ink); padding: calc(var(--pad) - 4px) var(--pad) var(--pad); }
+.spec { margin-top: 12px; font-size: var(--step-small); color: var(--paper-muted); }
+.paper > .cut { margin: 20px 0 clamp(24px, 3vw, 40px); }
+.body { display: grid; gap: 28px clamp(28px, 3.4vw, 48px); align-items: start; }
+.wide .body { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+.tall .body { grid-template-columns: minmax(0, min(360px, 40%)) minmax(0, 1fr); }
+.square .body { grid-template-columns: minmax(0, min(520px, 50%)) minmax(0, 1fr); }
+/* The notes are about the video, so beside them it stays in view while they're read. */
+.body video { width: 100%; background: var(--paper-ink); position: sticky; top: 24px; }
+.about { display: grid; gap: 12px; align-content: start; max-width: 62ch; }
+.about h4 { margin: 16px 0 0; font-size: var(--step-body); font-weight: 700; line-height: 1.3; }
+.about h4:first-child { margin-top: 0; }
+.about ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; }
+/* The stills each video model was given, small and at their own shapes; each links to a larger copy. */
+.stills { display: grid; gap: 8px; margin: 4px 0 0; }
+.stills figcaption { font-size: var(--step-small); color: var(--paper-muted); }
+.stills div { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; align-items: start; }
+.stills a { display: block; transition: translate .15s ease-out; }
+.stills a:hover { translate: 0 -2px; }
+.stills img { width: 100%; }
+details { margin-top: 8px; background: var(--paper-shade); }
+summary { cursor: pointer; min-height: 44px; padding: 10px 16px; font-weight: 600; transition: background .15s ease-out; }
+summary:hover { background: #d3d5d9; }
+details ol { margin: 0; padding: 0 16px 14px 40px; display: grid; gap: 4px; }
 
-.process { margin-top: 120px; padding-top: 48px; border-top: 1px solid var(--line); display: grid; gap: 28px; }
-.steps { margin: 0; padding-left: 22px; columns: 2; column-gap: 56px; }
-.steps li { break-inside: avoid; margin-bottom: 18px; padding-left: 4px; }
-.steps li::marker { color: var(--muted); }
+/* How it's made: the run printed as a slip, on a lighter graphite field. */
+.process { margin-top: clamp(96px, 10vw, 160px); padding: clamp(56px, 6vw, 96px) 0; background: var(--field); }
+.process-grid { width: var(--inner); margin: 0 auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px 24px; align-items: start; }
+.process-head { grid-column: 1 / span 5; display: grid; gap: 24px; }
+.process-head p { max-width: 30ch; }
+.slip { grid-column: 7 / span 6; max-width: 600px; padding: 36px 36px 64px; background: var(--paper); color: var(--paper-ink); font-variant-numeric: tabular-nums; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 97.9167% 100%, 95.8333% calc(100% - 12px), 93.75% 100%, 91.6667% calc(100% - 12px), 89.5833% 100%, 87.5% calc(100% - 12px), 85.4167% 100%, 83.3333% calc(100% - 12px), 81.25% 100%, 79.1667% calc(100% - 12px), 77.0833% 100%, 75% calc(100% - 12px), 72.9167% 100%, 70.8333% calc(100% - 12px), 68.75% 100%, 66.6667% calc(100% - 12px), 64.5833% 100%, 62.5% calc(100% - 12px), 60.4167% 100%, 58.3333% calc(100% - 12px), 56.25% 100%, 54.1667% calc(100% - 12px), 52.0833% 100%, 50% calc(100% - 12px), 47.9167% 100%, 45.8333% calc(100% - 12px), 43.75% 100%, 41.6667% calc(100% - 12px), 39.5833% 100%, 37.5% calc(100% - 12px), 35.4167% 100%, 33.3333% calc(100% - 12px), 31.25% 100%, 29.1667% calc(100% - 12px), 27.0833% 100%, 25% calc(100% - 12px), 22.9167% 100%, 20.8333% calc(100% - 12px), 18.75% 100%, 16.6667% calc(100% - 12px), 14.5833% 100%, 12.5% calc(100% - 12px), 10.4167% 100%, 8.33333% calc(100% - 12px), 6.25% 100%, 4.16667% calc(100% - 12px), 2.08333% 100%, 0% calc(100% - 12px)); }
+.slip h3 { margin: 28px 0 10px; font-size: var(--step-body); font-stretch: 100%; text-transform: none; line-height: 1.3; letter-spacing: 0; }
+.slip h3:first-child { margin-top: 0; }
+.slip dl { margin: 0; display: grid; gap: 10px; }
+.slip dl div { display: flex; align-items: last baseline; gap: 10px; }
+.slip dd { flex: 1 0 auto; display: flex; align-items: baseline; gap: 10px; margin: 0; white-space: nowrap; }
+/* The leader between a step and the tool that does it, as on a receipt. */
+.slip dd::before { content: ""; flex: 1; min-width: 20px; align-self: center; border-bottom: 4px dotted var(--paper-muted); translate: 0 .3em; }
+.total { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; margin: 28px -36px 0; padding: 10px 36px; background: var(--paper-ink); color: var(--paper); }
 
-footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted);
-  display: grid; gap: 0; font: 15px/1.6 var(--sans); }
+/* Send a brief: a coupon to fill in, with a perforated edge. */
+.brief { width: var(--inner); margin: clamp(96px, 10vw, 160px) auto; }
+/* Light scheme here so the select's arrow draws dark on the light fields. */
+.coupon { color-scheme: light; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 46fr 54fr; background: var(--orange); color: var(--paper-ink); }
+.coupon-left { padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+.coupon-right { position: relative; padding: clamp(28px, 4vw, 48px); border-left: 5px dotted var(--bg); display: grid; gap: 14px; align-content: start; }
+.coupon-right::before, .coupon-right::after { content: ""; position: absolute; left: -2.5px; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); translate: -50% -50%; }
+.coupon-right::after { top: 100%; }
+.coupon label { display: grid; gap: 4px; font-size: var(--step-small); font-weight: 600; }
+.coupon input, .coupon select { height: 52px; padding: 0 14px; border: 0; border-bottom: 2px solid var(--paper-ink); border-radius: 0; background: var(--paper); color: var(--paper-ink); font: 400 var(--step-body) "Archivo", system-ui, sans-serif; }
+.coupon button { height: 56px; margin-top: 6px; border: 0; background: var(--paper-ink); color: var(--paper); font: 600 var(--step-body) "Archivo", system-ui, sans-serif; cursor: pointer; transition: background .15s ease-out, translate .15s ease-out; }
+.coupon button:hover { background: #000; }
+.coupon button:active { translate: 0 1px; }
+.coupon [role=status]:empty { display: none; }
+
+/* The close: the back of a postcard, with a scalloped edge and a stamp. */
+footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50px; }
+.postcard { position: relative; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; padding: clamp(28px, 4vw, 48px); background: var(--paper); color: var(--paper-ink); }
+.scallops { position: absolute; bottom: calc(100% - 1px); left: 0; display: block; width: 100%; height: auto; color: var(--paper); }
+.postcard h2 { font-size: var(--step-lead); line-height: 1; margin-bottom: 16px; }
+.pc-right { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; }
+.address { margin: 0; padding: 0; list-style: none; font-size: var(--step-lead); line-height: 1.3; }
+.address a { display: inline-block; padding-block: 10px; }
+.address li:last-child { padding-block: 10px; }
+.stamp { width: 96px; padding: 6px; background: var(--orange); }
+.imprint { grid-column: 1 / -1; text-align: center; font-size: var(--step-small); color: var(--paper-muted); }
+
+/* Entrances, once, as each part arrives. They only rise, never fade, so no text is ever hidden waiting for a scroll. */
+.js .rise { translate: 0 24px; transition: translate .6s ease-out var(--d, 0ms); }
+.js .rise.in { translate: none; }
+.ads-head p, .about, .process-head p, .coupon-right { --d: 90ms; }
+.slip { --d: 180ms; }
+@media (prefers-reduced-motion: reduce) { .js .rise { translate: none; transition: none; } }
 
 @media (max-width: 900px) {
-  .ad.wide, .ad.square { grid-template-columns: minmax(0, 1fr); }
-  .ad.square video { max-width: 560px; }
+  .wide .body, .square .body { grid-template-columns: minmax(0, 1fr); }
+  .wide .body video, .square .body video { position: static; }
+  .square .body video { max-width: 560px; }
+  .process-head, .slip { grid-column: 1 / -1; }
+  /* Stacked, a sheet runs to the screen edges, so its text keeps the page's one pair of margins. */
+  .sheets { margin-inline: calc(-1 * var(--m)); }
+  .paper { --pad: var(--m); }
+  .tab { margin-left: var(--m); }
+}
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .pics { order: -1; position: relative; top: 0; height: 48svh; }
+  .card { position: relative; margin-top: -24px; }
+  .card .cut { height: 40px; gap: 4px; margin: 10px 10px 0; }
+  .card-body { padding: 40px 20px; }
+  .coupon { grid-template-columns: minmax(0, 1fr); }
+  .coupon-right { border-left: 0; border-top: 5px dotted var(--bg); }
+  .coupon-right::before, .coupon-right::after { top: -2.5px; left: 0; }
+  .coupon-right::after { left: 100%; }
+  .postcard, .pc-right { grid-template-columns: minmax(0, 1fr); }
+  .stamp { grid-row: 1; justify-self: end; width: 72px; }
 }
 @media (max-width: 640px) {
-  body { font-size: 16px; }
-  .wrap { padding-block: 40px 40px; }
-  .ads { gap: 64px; margin-top: 52px; }
-  .ad.tall { grid-template-columns: minmax(0, 1fr); }
-  .ad.tall video { max-width: 300px; }
-  .steps { columns: 1; }
-  .process { margin-top: 72px; padding-top: 36px; }
-  footer { margin-top: 56px; }
+  .tall .body { grid-template-columns: minmax(0, 1fr); }
+  .tall .body video { position: static; max-width: 300px; }
+  .slip { padding: 28px 20px 56px; }
+  .total { margin-inline: -20px; padding-inline: 20px; }
+  .slip dl div { flex-wrap: wrap; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Yohann Mar Gayao</h1>
-    <p class="tagline">Short video ads made with AI video models. A one-page brief goes in, a finished cut comes out of DaVinci Resolve.</p>
-    <ul class="contact">
-      <li>Baguio City, Philippines (Remote)</li>
-      <li><a href="mailto:yohanng500@gmail.com">yohanng500@gmail.com</a></li>
-      <li><a href="tel:+639294007939">(639)294007939</a></li>
-      <li><a href="https://github.com/DerpyNewb">github.com/DerpyNewb</a></li>
-    </ul>
-    <p class="intro">Eight spec ads in three shapes: 16:9 for YouTube, Facebook and the web; 9:16 for Reels and Stories; and square for the feed. The first four show off the product in live action. The other four play with style: stop-motion clay, a creator-style phone video, a little story with dialogue, and a 1990s TV spot. They all have music, but they start muted, so turn the sound on. Under each one is what went wrong and what happened next.</p>
-  </header>
+<header class="hero">
+  <div class="card">
+    <div class="cut" role="img" aria-label="Every shot in the eight ads, drawn at its length: 34 shots, 131 seconds in all">
+      <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i><i style="--s:4"></i></span>
+      <span style="--s:15"><i style="--s:3.75"></i><i style="--s:3.125"></i><i style="--s:5.125"></i><i style="--s:3"></i></span>
+      <span style="--s:12"><i style="--s:2"></i><i style="--s:2"></i><i style="--s:2.5"></i><i style="--s:2.5"></i><i style="--s:3"></i></span>
+      <span style="--s:12"><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i></span>
+      <span style="--s:12"><i style="--s:5"></i><i style="--s:3"></i><i style="--s:4"></i></span>
+      <span style="--s:15"><i style="--s:4.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:4"></i></span>
+      <span style="--s:20"><i style="--s:5.5"></i><i style="--s:3.75"></i><i style="--s:4.75"></i><i style="--s:6"></i></span>
+      <span style="--s:15"><i style="--s:5"></i><i style="--s:5.5"></i><i style="--s:4.5"></i></span>
+    </div>
+    <div class="card-body">
+      <p class="wordmark">Yohann Mar Gayao</p>
+      <h1>AI video ads</h1>
+      <p>Eight spec ads for brands that don't exist. Each one starts from a one&#8209;page brief and gets finished in DaVinci Resolve.</p>
+      <a class="button" href="#ads">Watch the eight ads</a>
+    </div>
+    <nav aria-label="On this page">
+      <a href="#process">How they're made</a>
+      <a href="#brief">Send a brief</a>
+      <a href="https://github.com/DerpyNewb">GitHub</a>
+    </nav>
+  </div>
+  <div class="pics" role="img" aria-label="Opening frames of four of the ads: Kalan, Dapit, Habi and Tamis">
+    <img src="media/kalan.jpg" width="720" height="1280" alt="">
+    <img src="media/dapit.jpg" width="1080" height="1080" alt="">
+    <img src="media/habi.jpg" width="720" height="1280" alt="">
+    <img src="media/tamis.jpg" width="1080" height="1080" alt="">
+  </div>
+</header>
 
-  <main class="ads">
-    <article class="ad wide" aria-labelledby="mistline">
-      <video src="media/mistline.mp4" poster="media/mistline.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Mistline Coffee ad, 30 seconds"></video>
-      <div class="about">
-        <h2 id="mistline">Mistline Coffee</h2>
-        <p class="spec"><span class="shape wide" aria-hidden="true"></span>30 seconds · 16:9 · YouTube and the web</p>
-        <p>Seven Veo 3.1 Fast clips from Google Flow, each one started from an approved still so the bag and the light match from shot to shot. Gemini TTS reads the voiceover, a colour grade gives everything the same misty-morning look, and DaVinci Resolve renders the cut.</p>
-        <ul>
-          <li>An arm crosses the frame in the coffee-picking shot. Claude Code stepped through it at 4 frames a second to make sure: it stays one arm, with five fingers on every hand.</li>
-          <li>Veo's own sound had a loud snap in it that jumped over the voice. Now the mix keeps the clip sound under the voice the whole way through.</li>
-        </ul>
-        <details>
-          <summary>Voiceover</summary>
-          <ol>
-            <li>Up here, the day starts above the clouds.</li>
-            <li>Every cherry is picked by hand.</li>
-            <li>Roasted slowly, in small batches.</li>
-            <li>Grown on small farms in the Benguet highlands.</li>
-            <li>Mistline Coffee.</li>
-          </ol>
-        </details>
-      </div>
-    </article>
+<main>
+  <section class="ads" id="ads" aria-labelledby="ads-h">
+    <div class="ads-head">
+      <h2 id="ads-h" class="rise">The eight ads</h2>
+      <p class="rise">Three shapes: 16:9 for YouTube and the web, 9:16 for Reels and Stories, and square for the feed. The first four show off the product in live action, and the other four play with style. They all have music, but they start muted, so turn the sound on. The bar across each sheet is its edit: one block per shot, at its real length.</p>
+    </div>
 
-    <article class="ad wide" aria-labelledby="lumaro">
-      <video src="media/lumaro.mp4" poster="media/lumaro.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Lumaro Sparkling Calamansi ad, 15 seconds"></video>
-      <div class="about">
-        <h2 id="lumaro">Lumaro Sparkling Calamansi</h2>
-        <p class="spec"><span class="shape wide" aria-hidden="true"></span>15 seconds · 16:9 · YouTube and the web</p>
-        <p>Four Gemini Omni clips made in the Gemini app, three of them using the same product still so the can doesn't change between shots. Gemini TTS reads the voiceover, and DaVinci Resolve renders the cut.</p>
-        <ul>
-          <li>Omni sometimes cuts to a new angle partway through a clip, so each shot only uses a stretch with no cut in it.</li>
-          <li>When the tab pops, the can shrinks by about a fifth. That shot ends right on the crack.</li>
-          <li>The first on-screen line, "Made with real calamansi juice.", ran across the can. Claude Code trimmed it to "Real calamansi."</li>
-        </ul>
-        <details>
-          <summary>Voiceover</summary>
-          <ol>
-            <li>Calamansi, the Philippine lime.</li>
-            <li>Lightly sweet, with a sour little bite.</li>
-            <li>Lumaro Sparkling Calamansi.</li>
-          </ol>
-        </details>
-      </div>
-    </article>
+    <div class="sheets">
+      <article class="sheet wide" aria-labelledby="mistline">
+        <div class="tab" aria-hidden="true"><span class="shape wide"></span></div>
+        <div class="paper">
+          <h3 id="mistline" class="rise">Mistline Coffee</h3>
+          <p class="spec">30 seconds · 16:9 · YouTube and the web</p>
+          <div class="cut" role="img" aria-label="The edit: seven shots of 4 or 5 seconds"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i><i style="--s:4"></i></div>
+          <div class="body">
+            <video class="rise" src="media/mistline.mp4" poster="media/mistline.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Mistline Coffee ad, 30 seconds"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>The coffee is grown high in the mountains, picked by hand and roasted in small batches. The film follows the bean from the farm to the cup.</p>
+              <h4>How it was made</h4>
+              <p>Seven Veo 3.1 Fast clips from Google Flow, each one started from an approved still so the bag and the light match from shot to shot. Gemini TTS reads the voiceover, and a colour grade gives everything the same misty-morning look.</p>
+              <figure class="stills">
+                <figcaption>The seven stills, made with OpenAI image generation through Codex.</figcaption>
+                <div>
+                  <a href="media/stills/mistline-s01.jpg"><img src="media/stills/mistline-s01-thumb.jpg" width="280" height="158" loading="lazy" alt="Sunrise over a sea of clouds and pine-covered ridges"></a>
+                  <a href="media/stills/mistline-s02.jpg"><img src="media/stills/mistline-s02-thumb.jpg" width="280" height="158" loading="lazy" alt="Hands picking red coffee cherries"></a>
+                  <a href="media/stills/mistline-s03.jpg"><img src="media/stills/mistline-s03-thumb.jpg" width="280" height="158" loading="lazy" alt="Coffee cherries drying on raised beds on a hillside"></a>
+                  <a href="media/stills/mistline-s04.jpg"><img src="media/stills/mistline-s04-thumb.jpg" width="280" height="158" loading="lazy" alt="Coffee beans tumbling in a roaster drum"></a>
+                  <a href="media/stills/mistline-s05.jpg"><img src="media/stills/mistline-s05-thumb.jpg" width="280" height="158" loading="lazy" alt="Water poured into a pour-over dripper, the kraft coffee bag behind it"></a>
+                  <a href="media/stills/mistline-s06.jpg"><img src="media/stills/mistline-s06-thumb.jpg" width="280" height="158" loading="lazy" alt="A woman holding a mug at a window over misty pine hills"></a>
+                  <a href="media/stills/mistline-s07.jpg"><img src="media/stills/mistline-s07-thumb.jpg" width="280" height="158" loading="lazy" alt="The kraft coffee bag with a sage band beside a mug, by a misty window"></a>
+                </div>
+              </figure>
+              <details>
+                <summary>Voiceover</summary>
+                <ol>
+                  <li>Up here, the day starts above the clouds.</li>
+                  <li>Every cherry is picked by hand.</li>
+                  <li>Roasted slowly, in small batches.</li>
+                  <li>Grown on small farms in the Benguet highlands.</li>
+                  <li>Mistline Coffee.</li>
+                </ol>
+              </details>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>An arm crosses the frame in the coffee-picking shot. Claude Code stepped through it at 4 frames a second to make sure: it stays one arm, with five fingers on every hand.</li>
+                <li>Veo's own sound had a loud snap in it that jumped over the voice. Now the mix keeps the clip sound under the voice the whole way through.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad tall" aria-labelledby="kalan">
-      <video src="media/kalan.mp4" poster="media/kalan.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Kalan Chili Garlic Crisp ad, 12 seconds, vertical"></video>
-      <div class="about">
-        <h2 id="kalan">Kalan Chili Garlic Crisp</h2>
-        <p class="spec"><span class="shape tall" aria-hidden="true"></span>12 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
-        <p>Five Veo 3.1 Fast clips from Google Flow, with a jar still made in Flow so the jar stays the same. It's paced for a feed: something moves in the first frame, the brand's on screen by 2 seconds, and there's a cut every 2 to 3 seconds. It works with the sound off, too.</p>
-        <ul>
-          <li>Captions stay out of the top 14% and the bottom 35% of the frame, where Reels and Stories put the account name and buttons. They also stay inside the middle part that Facebook Feed shows.</li>
-          <li>In the spoon shot the jar loses its lid with nobody touching it, so the edit uses a later stretch of that clip.</li>
-        </ul>
-      </div>
-    </article>
+      <article class="sheet wide" aria-labelledby="lumaro">
+        <div class="tab" aria-hidden="true"><span class="shape wide"></span></div>
+        <div class="paper">
+          <h3 id="lumaro" class="rise">Lumaro Sparkling Calamansi</h3>
+          <p class="spec">15 seconds · 16:9 · YouTube and the web</p>
+          <div class="cut" role="img" aria-label="The edit: four shots of 3 to 5 seconds"><i style="--s:3.75"></i><i style="--s:3.125"></i><i style="--s:5.125"></i><i style="--s:3"></i></div>
+          <div class="body">
+            <video class="rise" src="media/lumaro.mp4" poster="media/lumaro.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Lumaro Sparkling Calamansi ad, 15 seconds"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>It is made with real calamansi juice. It is lightly sweet with a sour bite, and best served over ice.</p>
+              <h4>How it was made</h4>
+              <p>Four Gemini Omni clips made in the Gemini app, three of them using the same product still so the can doesn't change between shots. Gemini TTS reads the voiceover.</p>
+              <figure class="stills">
+                <figcaption>The product still, made with Gemini's image generation.</figcaption>
+                <div>
+                  <a href="media/stills/lumaro-can.jpg"><img src="media/stills/lumaro-can-thumb.jpg" width="280" height="156" loading="lazy" alt="A green can with a blank white label on a wooden table"></a>
+                </div>
+              </figure>
+              <details>
+                <summary>Voiceover</summary>
+                <ol>
+                  <li>Calamansi, the Philippine lime.</li>
+                  <li>Lightly sweet, with a sour little bite.</li>
+                  <li>Lumaro Sparkling Calamansi.</li>
+                </ol>
+              </details>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>Omni sometimes cuts to a new angle partway through a clip, so each shot only uses a stretch with no cut in it.</li>
+                <li>When the tab pops, the can shrinks by about a fifth. That shot ends right on the crack.</li>
+                <li>The first on-screen line, "Made with real calamansi juice", ran across the can. Claude Code trimmed it to "Real calamansi."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad square" aria-labelledby="dapit">
-      <video src="media/dapit.mp4" poster="media/dapit.jpg" width="1080" height="1080" muted loop playsinline controls preload="none" aria-label="Dapit Soy Candles ad, 12 seconds, square"></video>
-      <div class="about">
-        <h2 id="dapit">Dapit Soy Candles</h2>
-        <p class="spec"><span class="shape square" aria-hidden="true"></span>12 seconds · 1:1 · Facebook and Instagram feed</p>
-        <p>Veo only makes wide and tall video, so it made the four clips wide with the candle in the middle, and the edit keeps the centre square. It's slower than the Reels ad: four shots, 3 seconds each.</p>
-        <ul>
-          <li>The opening shot shows the steady flame, not the lighting. In the clip the match showed up already burnt out, and the flame lit before it touched the wick.</li>
-          <li>The third shot's first take had a thicker wick than the first shot, so Veo made it again from a corrected prompt.</li>
-          <li>The titles sit on a soft dark gradient, because white type on cream wax was hard to read.</li>
-        </ul>
-      </div>
-    </article>
+      <article class="sheet tall" aria-labelledby="kalan">
+        <div class="tab" aria-hidden="true"><span class="shape tall"></span></div>
+        <div class="paper">
+          <h3 id="kalan" class="rise">Kalan Chili Garlic Crisp</h3>
+          <p class="spec">12 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
+          <div class="cut" role="img" aria-label="The edit: five shots of 2 to 3 seconds"><i style="--s:2"></i><i style="--s:2"></i><i style="--s:2.5"></i><i style="--s:2.5"></i><i style="--s:3"></i></div>
+          <div class="body">
+            <video class="rise" src="media/kalan.mp4" poster="media/kalan.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Kalan Chili Garlic Crisp ad, 12 seconds, vertical"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>The garlic is fried crisp and kept in chili oil. People spoon it over rice, eggs and noodles.</p>
+              <h4>How it was made</h4>
+              <p>Five Veo 3.1 Fast clips from Google Flow, with a jar still made in Flow so the jar stays the same. It's paced for a feed: something moves in the first frame, the brand's on screen by 2 seconds, and there's a cut every 2 to 3 seconds. It works with the sound off, too.</p>
+              <figure class="stills">
+                <figcaption>The jar still, made by Nano Banana 2.1 in Flow and used in the two jar shots.</figcaption>
+                <div>
+                  <a href="media/stills/kalan-jar.jpg"><img src="media/stills/kalan-jar-thumb.jpg" width="280" height="280" loading="lazy" alt="A jar of chili garlic crisp with a black lid on a wooden counter"></a>
+                </div>
+              </figure>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>Captions stay out of the top 14% and the bottom 35% of the frame, where Reels and Stories put the account name and buttons. They also stay inside the middle part that Facebook Feed shows.</li>
+                <li>In the spoon shot the jar loses its lid with nobody touching it, so the edit uses a later stretch of that clip.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad square" aria-labelledby="tamis">
-      <video src="media/tamis.mp4" poster="media/tamis.jpg" width="1080" height="1080" muted loop playsinline controls preload="none" aria-label="Tamis Ube Jam ad, 12 seconds, square, stop-motion clay"></video>
-      <div class="about">
-        <h2 id="tamis">Tamis Ube Jam</h2>
-        <p class="spec"><span class="shape square" aria-hidden="true"></span>12 seconds · 1:1 · Facebook and Instagram feed</p>
-        <p>Stop-motion claymation from Veo 3.1 Fast in Google Flow, built on clay stills that Nano Banana made in Flow. The titles are in a handwritten face to match.</p>
-        <ul>
-          <li>Halfway through the spreading shot, the clip shatters into tiles and jumps to a new scene. The edit keeps only the clean second half.</li>
-          <li>After the lid pops off in the first shot, a second lid shows up next to the jar, so that shot ends just before it does.</li>
-          <li>Veo copied the framing of the jar still it was given, which put the end title on the lid. Twice. A wider still with the jar low in the frame fixed it on the third take.</li>
-        </ul>
-      </div>
-    </article>
+      <article class="sheet square" aria-labelledby="dapit">
+        <div class="tab" aria-hidden="true"><span class="shape square"></span></div>
+        <div class="paper">
+          <h3 id="dapit" class="rise">Dapit Soy Candles</h3>
+          <p class="spec">12 seconds · 1:1 · Facebook and Instagram feed</p>
+          <div class="cut" role="img" aria-label="The edit: four shots of 3 seconds each"><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i></div>
+          <div class="body">
+            <video class="rise" src="media/dapit.mp4" poster="media/dapit.jpg" width="1080" height="1080" muted loop playsinline controls preload="none" aria-label="Dapit Soy Candles ad, 12 seconds, square"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>The wooden wick crackles. Each candle is poured by hand in small batches.</p>
+              <h4>How it was made</h4>
+              <p>Veo only makes wide and tall video, so it made the four clips wide with the candle in the middle, and the edit keeps the centre square. It's slower than the Reels ad: four shots, 3 seconds each.</p>
+              <figure class="stills">
+                <figcaption>The candle still, made by Nano Banana 2.1 in Flow and used in all four shots.</figcaption>
+                <div>
+                  <a href="media/stills/dapit-candle.jpg"><img src="media/stills/dapit-candle-thumb.jpg" width="280" height="280" loading="lazy" alt="A terracotta soy candle with a wooden wick on a wooden table"></a>
+                </div>
+              </figure>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>The opening shot shows the steady flame, not the lighting. In the clip the match showed up already burnt out, and the flame lit before it touched the wick.</li>
+                <li>The third shot's first take had a thicker wick than the first shot, so Veo made it again from a corrected prompt.</li>
+                <li>The titles sit on a soft dark gradient, because white type on cream wax was hard to read.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad tall" aria-labelledby="habi">
-      <video src="media/habi.mp4" poster="media/habi.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Habi Rattan Bag ad, 15 seconds, vertical, creator-style"></video>
-      <div class="about">
-        <h2 id="habi">Habi Rattan Bag</h2>
-        <p class="spec"><span class="shape tall" aria-hidden="true"></span>15 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
-        <p>A creator-style phone video. The woman is AI-generated, and Veo 3.1 Fast voiced her lines right in the clips. The captions repeat what she says, for anyone watching with the sound off.</p>
-        <ul>
-          <li>Veo made the phone shot twice. The first take turned the round bag into a half-moon with a leather flap.</li>
-          <li>Veo paced the lines its own way: a pause before "bag", and a long one before "it all fits". A Whisper transcript gave the timing of every word, so every cut falls between words. The phone shot ends before "it all fits", and its caption just says "Phone, wallet, keys."</li>
-          <li>Veo made the end shot again from further back. In the first take, the peg and the top of the strap sat right where the brand name goes.</li>
-        </ul>
-        <details>
-          <summary>Lines</summary>
-          <ol>
-            <li>Okay, I need to show you this bag.</li>
-            <li>Phone, wallet, keys.</li>
-            <li>Handwoven, and it goes with everything.</li>
-          </ol>
-        </details>
-      </div>
-    </article>
+      <article class="sheet square" aria-labelledby="tamis">
+        <div class="tab" aria-hidden="true"><span class="shape square"></span></div>
+        <div class="paper">
+          <h3 id="tamis" class="rise">Tamis Ube Jam</h3>
+          <p class="spec">12 seconds · 1:1 · Facebook and Instagram feed</p>
+          <div class="cut" role="img" aria-label="The edit: three shots of 5, 3 and 4 seconds"><i style="--s:5"></i><i style="--s:3"></i><i style="--s:4"></i></div>
+          <div class="body">
+            <video class="rise" src="media/tamis.mp4" poster="media/tamis.jpg" width="1080" height="1080" muted loop playsinline controls preload="none" aria-label="Tamis Ube Jam ad, 12 seconds, square, stop-motion clay"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>Made from real ube, cooked slowly. Good on warm pandesal.</p>
+              <h4>How it was made</h4>
+              <p>Stop-motion claymation from Veo 3.1 Fast in Google Flow, built on clay stills that Nano Banana made in Flow. The titles are in a handwritten face to match.</p>
+              <figure class="stills">
+                <figcaption>The two clay stills, made by Nano Banana 2.1 in Flow: close for the first two shots, wide for the third.</figcaption>
+                <div>
+                  <a href="media/stills/tamis-jar.jpg"><img src="media/stills/tamis-jar-thumb.jpg" width="280" height="280" loading="lazy" alt="A clay jar of purple ube jam with a cream lid, against a lilac wall"></a>
+                  <a href="media/stills/tamis-jar-wide.jpg"><img src="media/stills/tamis-jar-wide-thumb.jpg" width="280" height="156" loading="lazy" alt="The same clay jar, small and low in a wide frame"></a>
+                </div>
+              </figure>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>Halfway through the spreading shot, the clip shatters into tiles and jumps to a new scene. The edit keeps only the clean second half.</li>
+                <li>After the lid pops off in the first shot, a second lid shows up next to the jar, so that shot ends just before it does.</li>
+                <li>Veo copied the framing of the jar still it was given, which put the end title on the lid. Twice. A wider still with the jar low in the frame fixed it on the third take.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad wide" aria-labelledby="init">
-      <video src="media/init.mp4" poster="media/init.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Init Salabat ad, 20 seconds, a short story with dialogue"></video>
-      <div class="about">
-        <h2 id="init">Init Salabat</h2>
-        <p class="spec"><span class="shape wide" aria-hidden="true"></span>20 seconds · 16:9 · YouTube and Facebook</p>
-        <p>A short story with dialogue: a grandmother and her grandson on a rainy afternoon in Baguio, both AI-generated. Veo 3.1 Fast voiced every line in the clips, and the music sits under them.</p>
-        <ul>
-          <li>Veo put a third hand in the pouring shot, and the review missed it because it only looked at about one frame a second. The second take did the same once the kettle came in. So the shot now ends on the spoonful, before the kettle, and "Hot water" is gone.</li>
-          <li>In the last shot Veo threw in two lines that weren't in the script. They stayed: "It'll warm you up" is what the brief wanted the ad to say anyway, and it makes no health claim.</li>
-          <li>Flow Music can split a track into stems. The first track for this ad had something in its vocal stem from 16 seconds on, which could have been a voice or just the cello. Claude Code swapped in a second take whose vocal stem is silent apart from one faint blip.</li>
-        </ul>
-        <details>
-          <summary>Dialogue</summary>
-          <ol>
-            <li>Soaked again? Sit.</li>
-            <li>One spoonful.</li>
-            <li>Better than my jacket.</li>
-            <li>Smells good, Lola.</li>
-            <li>It'll warm you up, Apo.</li>
-          </ol>
-        </details>
-      </div>
-    </article>
+      <article class="sheet tall" aria-labelledby="habi">
+        <div class="tab" aria-hidden="true"><span class="shape tall"></span></div>
+        <div class="paper">
+          <h3 id="habi" class="rise">Habi Rattan Bag</h3>
+          <p class="spec">15 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
+          <div class="cut" role="img" aria-label="The edit: four shots of 3.25 to 4.25 seconds"><i style="--s:4.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:4"></i></div>
+          <div class="body">
+            <video class="rise" src="media/habi.mp4" poster="media/habi.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Habi Rattan Bag ad, 15 seconds, vertical, creator-style"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>It's handwoven. A phone, wallet and keys fit inside. It goes with everything.</p>
+              <h4>How it was made</h4>
+              <p>A creator-style phone video. The woman is AI-generated, and Veo 3.1 Fast voiced her lines right in the clips. The captions repeat what she says, for anyone watching with the sound off.</p>
+              <figure class="stills">
+                <figcaption>Two stills, made by Nano Banana 2.1 in Flow: the woman with the bag for the first three shots, the bag on a peg for the end shot.</figcaption>
+                <div>
+                  <a href="media/stills/habi-woman.jpg"><img src="media/stills/habi-woman-thumb.jpg" width="280" height="502" loading="lazy" alt="A woman in her apartment holding up a round rattan bag by its leather strap"></a>
+                  <a href="media/stills/habi-bag.jpg"><img src="media/stills/habi-bag-thumb.jpg" width="280" height="280" loading="lazy" alt="The round rattan bag hanging from a wall peg"></a>
+                </div>
+              </figure>
+              <details>
+                <summary>Lines</summary>
+                <ol>
+                  <li>Okay, I need to show you this bag.</li>
+                  <li>Phone, wallet, keys.</li>
+                  <li>Handwoven, and it goes with everything.</li>
+                </ol>
+              </details>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>Veo made the phone shot twice. The first take turned the round bag into a half-moon with a leather flap.</li>
+                <li>Veo paced the lines its own way: a pause before "bag", and a long one before "it all fits". A Whisper transcript gave the timing of every word, so every cut falls between words. The phone shot ends before "it all fits", and its caption just says "Phone, wallet, keys."</li>
+                <li>Veo made the end shot again from further back. In the first take, the peg and the top of the strap sat right where the brand name goes.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <article class="ad wide" aria-labelledby="sabaw">
-      <video src="media/sabaw.mp4" poster="media/sabaw.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Sabaw Supreme Instant Mami ad, 15 seconds, styled as a 1990s TV commercial"></video>
-      <div class="about">
-        <h2 id="sabaw">Sabaw Supreme Instant Mami</h2>
-        <p class="spec"><span class="shape wide" aria-hidden="true"></span>15 seconds · 16:9 · YouTube and Facebook</p>
-        <p>A 1990s Filipino TV commercial on VHS, from Veo 3.1 Fast: soft, saturated tape, snap zooms, a boy hamming it up, and an announcer for the brand name. Flow Music got a brief for a 90s commercial backing track, cheesy keyboard riff included. The boy is AI-generated, and the titles are bold yellow with a hard shadow.</p>
-        <ul>
-          <li>The first clip says the brand name at the start and the claim a few seconds later. The edit keeps the claim and saves the brand name for the end.</li>
-          <li>The cooking shot dissolves to the kettle partway through. That stayed in, since a dissolve suits a 90s spot.</li>
-          <li>The end shot stops at four and a half seconds, before a snap zoom that would push the pouch under the brand name.</li>
-        </ul>
-        <details>
-          <summary>Lines</summary>
-          <ol>
-            <li>Rich chicken broth!</li>
-            <li>Ready in three minutes!</li>
-            <li>Sabaw Supreme!</li>
-          </ol>
-        </details>
-      </div>
-    </article>
-  </main>
+      <article class="sheet wide" aria-labelledby="init">
+        <div class="tab" aria-hidden="true"><span class="shape wide"></span></div>
+        <div class="paper">
+          <h3 id="init" class="rise">Init Salabat</h3>
+          <p class="spec">20 seconds · 16:9 · YouTube and Facebook</p>
+          <div class="cut" role="img" aria-label="The edit: four shots of 3.75 to 6 seconds"><i style="--s:5.5"></i><i style="--s:3.75"></i><i style="--s:4.75"></i><i style="--s:6"></i></div>
+          <div class="body">
+            <video class="rise" src="media/init.mp4" poster="media/init.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Init Salabat ad, 20 seconds, a short story with dialogue"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>Salabat warms you up on a cold day, and it's quick to make from the jar.</p>
+              <h4>How it was made</h4>
+              <p>A short story with dialogue: a grandmother and her grandson on a rainy afternoon in Baguio, both AI-generated. Veo 3.1 Fast voiced every line in the clips, and the music sits under them.</p>
+              <figure class="stills">
+                <figcaption>Two stills, made by Nano Banana 2.1 in Flow: the grandmother and grandson for shots 1 and 3, the jar for shots 2 and 4.</figcaption>
+                <div>
+                  <a href="media/stills/init-family.jpg"><img src="media/stills/init-family-thumb.jpg" width="280" height="156" loading="lazy" alt="A grandmother cooking at a stove, her grandson beside her, in a wooden kitchen"></a>
+                  <a href="media/stills/init-jar.jpg"><img src="media/stills/init-jar-thumb.jpg" width="280" height="156" loading="lazy" alt="A jar of ginger tea powder and an enamel mug by a rainy window"></a>
+                </div>
+              </figure>
+              <details>
+                <summary>Dialogue</summary>
+                <ol>
+                  <li>Soaked again? Sit.</li>
+                  <li>One spoonful.</li>
+                  <li>Better than my jacket.</li>
+                  <li>Smells good, Lola.</li>
+                  <li>It'll warm you up, Apo.</li>
+                </ol>
+              </details>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>Veo put a third hand in the pouring shot, and Claude Code's review missed it because it only looked at about one frame a second. The second take did the same once the kettle came in. So the shot now ends on the spoonful, before the kettle, and the grandmother's line stops at "One spoonful."</li>
+                <li>In the last shot Veo threw in two lines that weren't in the script, "Smells good, Lola" and "It'll warm you up, Apo". Both stayed. The second is what the brief wanted the ad to say anyway, and it makes no health claim.</li>
+                <li>Flow Music can split a track into stems. The first track for this ad had something in its vocal stem from 16 seconds on, which could have been a voice or just the cello. Claude Code swapped in a second take whose vocal stem is silent apart from one faint blip.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
 
-  <section class="process" aria-labelledby="process">
-    <h2 id="process">How each ad gets made</h2>
-    <ol class="steps">
-      <li>Every ad starts from a one-page brief: the product, who it's for, and the claims the ad is allowed to make.</li>
-      <li>A coding agent turns the brief into a shot list, with one subject and one camera move per shot. It never asks the video model for on-screen text, because the model garbles it. A script checks the shot list against those rules and writes the prompts.</li>
-      <li>Veo 3.1 in Google Flow, or Gemini Omni in the Gemini app, makes each shot, with a still of the product or the people attached so they look the same every time. When Veo speaks a line itself, a Whisper transcript gives each word's timing, so every cut lands between words.</li>
-      <li>The script throws out clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip.</li>
-      <li>Claude Code goes through frames from every clip looking for bad hands and faces, garbled text, objects that change shape and physics that look off, and logs what it finds as an AI review.</li>
-      <li>Flow Music makes each ad's music from a short brief, and its stem split flags anything that might be a voice.</li>
-      <li>The script grades the clips, sets the titles and mixes the sound, with the music under any voice and up front when nobody's talking. DaVinci Resolve renders the edit, and every ad ships with a record that marks it as AI-generated.</li>
-    </ol>
+      <article class="sheet wide" aria-labelledby="sabaw">
+        <div class="tab" aria-hidden="true"><span class="shape wide"></span></div>
+        <div class="paper">
+          <h3 id="sabaw" class="rise">Sabaw Supreme Instant Mami</h3>
+          <p class="spec">15 seconds · 16:9 · YouTube and Facebook</p>
+          <div class="cut" role="img" aria-label="The edit: three shots of 5, 5.5 and 4.5 seconds"><i style="--s:5"></i><i style="--s:5.5"></i><i style="--s:4.5"></i></div>
+          <div class="body">
+            <video class="rise" src="media/sabaw.mp4" poster="media/sabaw.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="Sabaw Supreme Instant Mami ad, 15 seconds, styled as a 1990s TV commercial"></video>
+            <div class="about rise">
+              <h4>From the brief</h4>
+              <p>Rich chicken broth, ready in three minutes.</p>
+              <h4>How it was made</h4>
+              <p>A 1990s Filipino TV commercial on VHS, from Veo 3.1 Fast: soft, saturated tape, snap zooms, a boy hamming it up, and an announcer for the brand name. Flow Music got a brief for a 90s commercial backing track, cheesy keyboard riff included. The boy is AI-generated, and the titles are bold yellow with a hard shadow.</p>
+              <figure class="stills">
+                <figcaption>Two stills, made by Nano Banana 2.1 in Flow: the boy for the first shot, the pouch for the other two.</figcaption>
+                <div>
+                  <a href="media/stills/sabaw-boy.jpg"><img src="media/stills/sabaw-boy-thumb.jpg" width="280" height="156" loading="lazy" alt="A boy in a striped shirt holding chopsticks over a bowl of noodles"></a>
+                  <a href="media/stills/sabaw-pouch.jpg"><img src="media/stills/sabaw-pouch-thumb.jpg" width="280" height="156" loading="lazy" alt="A shiny gold pouch against a red background"></a>
+                </div>
+              </figure>
+              <details>
+                <summary>Lines</summary>
+                <ol>
+                  <li>Rich chicken broth!</li>
+                  <li>Ready in three minutes!</li>
+                  <li>Sabaw Supreme!</li>
+                </ol>
+              </details>
+              <h4>What went wrong</h4>
+              <ul>
+                <li>The first clip says the brand name at the start and the claim a few seconds later. The edit keeps the claim and saves the brand name for the end.</li>
+                <li>The cooking shot dissolves to the kettle partway through. That stayed in, since a dissolve suits a 90s spot.</li>
+                <li>The end shot stops at four and a half seconds, before a snap zoom that would push the pouch under the brand name.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
-  <footer>
-    <p>These are spec ads for brands that don't exist. Every clip is AI-generated, people included, and so is the music. None of it is client work.</p>
-    <p><a href="mailto:yohanng500@gmail.com">yohanng500@gmail.com</a></p>
-  </footer>
-</div>
+  <section class="process" id="process" aria-labelledby="process-h">
+    <div class="process-grid">
+      <div class="process-head">
+        <h2 id="process-h" class="rise">How each ad gets made</h2>
+        <p class="rise">The same run for all eight, from a one&#8209;page brief to a render in DaVinci Resolve. The right-hand column names the tool or model that does each step.</p>
+      </div>
+      <div class="slip rise">
+        <h3>The brief</h3>
+        <dl>
+          <div><dt>The product, who it's for, and the claims the ad is allowed to make</dt><dd>1 page</dd></div>
+          <div><dt>A shot list: one subject and one camera move per shot, and no on-screen text, because video models garble it</dt><dd>A coding agent</dd></div>
+          <div><dt>The prompts, checked against those rules</dt><dd>The script</dd></div>
+        </dl>
+        <h3>The clips</h3>
+        <dl>
+          <div><dt>Stills of the product and the people, to keep them looking the same from shot to shot</dt><dd>Nano Banana 2.1, mostly</dd></div>
+          <div><dt>Each shot, with a still attached</dt><dd>Veo 3.1 or Gemini Omni</dd></div>
+          <div><dt>Word timings when Veo speaks a line, so every cut lands between words</dt><dd>Whisper</dd></div>
+        </dl>
+        <h3>The checks</h3>
+        <dl>
+          <div><dt>Throws out clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip</dt><dd>The script</dd></div>
+          <div><dt>Goes through frames from every clip for bad hands and faces, garbled text, objects that change shape and physics that look off, and logs it as an AI review</dt><dd>Claude Code</dd></div>
+        </dl>
+        <h3>The finish</h3>
+        <dl>
+          <div><dt>Music from a short brief, with a stem split that flags anything that might be a voice</dt><dd>Flow Music</dd></div>
+          <div><dt>The grade, the titles and the sound mix, with the music under any voice and up front when nobody's talking</dt><dd>The script</dd></div>
+          <div><dt>The render</dt><dd>DaVinci Resolve</dd></div>
+        </dl>
+        <p class="total"><span>Each ad, with a manifest that marks it as AI-generated and records each shot's prompt</span><span>8 ads</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="brief" id="brief" aria-labelledby="brief-h">
+    <form class="coupon" action="mailto:yohanng500@gmail.com?subject=Ad%20brief" method="post" enctype="text/plain">
+      <div class="coupon-left rise">
+        <h2 id="brief-h">Send a brief</h2>
+        <p>Every ad here started from a one-page brief. Fill in yours and your email app opens with it written out, addressed to yohanng500@gmail.com.</p>
+      </div>
+      <div class="coupon-right rise">
+        <label>The product<input name="Product" required autocomplete="off"></label>
+        <label>Who it's for<input name="Who it's for" autocomplete="off"></label>
+        <label>What the ad may claim<input name="What it may claim" autocomplete="off"></label>
+        <label>Shape<select name="Shape">
+          <option>16:9 for YouTube and the web</option>
+          <option>9:16 for Reels and Stories</option>
+          <option>1:1 for the feed</option>
+          <option>Not sure yet</option>
+        </select></label>
+        <button type="submit">Write the email</button>
+        <p role="status"></p>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="postcard rise">
+    <svg class="scallops" viewBox="0 0 1200 50" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 50A50 50 0 0 1 100 50A50 50 0 0 1 200 50A50 50 0 0 1 300 50A50 50 0 0 1 400 50A50 50 0 0 1 500 50A50 50 0 0 1 600 50A50 50 0 0 1 700 50A50 50 0 0 1 800 50A50 50 0 0 1 900 50A50 50 0 0 1 1000 50A50 50 0 0 1 1100 50A50 50 0 0 1 1200 50Z"/></svg>
+    <div>
+      <h2>From Baguio City</h2>
+      <p>These are spec ads for brands that don't exist. Every clip and still is AI-generated, people included, and so is the music. None of it is client work.</p>
+    </div>
+    <div class="pc-right">
+      <ul class="address">
+        <li><a href="mailto:yohanng500@gmail.com">yohanng500@gmail.com</a></li>
+        <li><a href="tel:+639294007939">(639)294007939</a></li>
+        <li><a href="https://github.com/DerpyNewb">github.com/DerpyNewb</a></li>
+        <li>Baguio City, Philippines (Remote)</li>
+      </ul>
+      <img class="stamp" src="media/stills/stamp.jpg" width="180" height="240" loading="lazy" alt="Sunrise over a sea of clouds, from the Mistline stills">
+    </div>
+    <p class="imprint">© 2026 Yohann Mar Gayao</p>
+  </div>
+</footer>
 <script>
 // Play each ad muted while it's on screen, as a feed would. A video the viewer pauses stays paused.
 const quiet = matchMedia('(prefers-reduced-motion: reduce)');
@@ -283,6 +609,24 @@ document.querySelectorAll('video').forEach(video => {
   video.addEventListener('pause', () => { if (video.dataset.auto) delete video.dataset.auto; else held.add(video); });
   video.addEventListener('play', () => held.delete(video));
   watch.observe(video);
+});
+
+// Each part rises in once as it arrives. .js goes on here, so without the script nothing starts hidden.
+document.documentElement.classList.add('js');
+const arrive = new IntersectionObserver(entries => entries.forEach(({ target, isIntersecting }) => {
+  if (isIntersecting) { target.classList.add('in'); arrive.unobserve(target); }
+}));
+document.querySelectorAll('.rise').forEach(el => arrive.observe(el));
+
+// The brief goes out as an email with the answers written out. Without the script, the form's own mailto action still opens one.
+const form = document.querySelector('.coupon');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const body = [...new FormData(form)].map(([name, value]) => `${name}: ${value}`).join('\n');
+  const href = `mailto:yohanng500@gmail.com?subject=${encodeURIComponent('Ad brief')}&body=${encodeURIComponent(body)}`;
+  const link = Object.assign(document.createElement('a'), { href, textContent: 'open it from here' });
+  form.querySelector('[role=status]').replaceChildren("Your email app should open with the brief filled in. If it didn't, ", link, '.');
+  location.href = href;
 });
 </script>
 </body>
