@@ -88,7 +88,8 @@ h2, h3 { font-size: var(--step-head); }
 .tall .body { grid-template-columns: minmax(0, min(360px, 40%)) minmax(0, 1fr); }
 .square .body { grid-template-columns: minmax(0, min(520px, 50%)) minmax(0, 1fr); }
 /* The notes are about the video, so beside them it stays in view while they're read. */
-.body video { width: 100%; background: var(--paper-ink); position: sticky; top: 24px; }
+.body video { width: 100%; max-height: calc(100svh - 48px); object-fit: contain; background: var(--paper-ink); position: sticky; top: 24px; }
+.media-error a { display: inline-block; min-height: 44px; padding-block: 8px; }
 .about { display: grid; gap: 12px; align-content: start; max-width: 62ch; }
 .about h4 { margin: 16px 0 0; font-size: var(--step-body); font-weight: 700; line-height: 1.3; }
 .about h4:first-child { margin-top: 0; }
@@ -202,13 +203,13 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
 <body>
 <header class="hero">
   <div class="card">
-    <div class="cut" role="img" aria-label="Every shot in the eight ads, drawn at its length: 34 shots, 131 seconds in all">
+    <div class="cut" role="img" aria-label="Every shot in the eight ads, drawn at its length: 34 shots, 129 seconds in all">
       <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i><i style="--s:4"></i></span>
       <span style="--s:15"><i style="--s:3.75"></i><i style="--s:3.125"></i><i style="--s:5.125"></i><i style="--s:3"></i></span>
       <span style="--s:12"><i style="--s:2"></i><i style="--s:2"></i><i style="--s:2.5"></i><i style="--s:2.5"></i><i style="--s:3"></i></span>
       <span style="--s:12"><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i></span>
       <span style="--s:12"><i style="--s:5"></i><i style="--s:3"></i><i style="--s:4"></i></span>
-      <span style="--s:15"><i style="--s:4.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:4"></i></span>
+      <span style="--s:13.375"><i style="--s:4"></i><i style="--s:2.875"></i><i style="--s:3.5"></i><i style="--s:3"></i></span>
       <span style="--s:20"><i style="--s:5.5"></i><i style="--s:3.75"></i><i style="--s:4.75"></i><i style="--s:6"></i></span>
       <span style="--s:15"><i style="--s:5"></i><i style="--s:5.5"></i><i style="--s:4.5"></i></span>
     </div>
@@ -236,7 +237,7 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
   <section class="ads" id="ads" aria-labelledby="ads-h">
     <div class="ads-head">
       <h2 id="ads-h" class="rise">The ads</h2>
-      <p class="rise">Three shapes: 16:9 for YouTube and the web, 9:16 for Reels and Stories, and square for the feed. The first four show off the product in live action, and the next four play with style. Last comes a series: five how-to Reels for one wellness page, on a single sheet. They all have music, but they start muted, so turn the sound on. The bar across each sheet is its edit: one block per shot, at its real length.</p>
+      <p class="rise">Three shapes: 16:9 for YouTube and the web, 9:16 for Reels and Stories, and square for the feed. The first four use a photorealistic product-ad style, and the next four try other styles. Last comes a series: five how-to Reels for one fictional wellness page, on a single sheet. They all have music, but they start muted, so turn the sound on. The bar across each sheet is its edit: one block per shot, at its real length.</p>
     </div>
 
     <div class="sheets">
@@ -275,10 +276,10 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <li>Mistline Coffee.</li>
                 </ol>
               </details>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>An arm crosses the frame in the coffee-picking shot. Claude Code stepped through it at 4 frames a second to make sure: it stays one arm, with five fingers on every hand.</li>
-                <li>Veo's own sound had a loud snap in it that jumped over the voice. Now the mix keeps the clip sound under the voice the whole way through.</li>
+                <li>Checked the coffee-picking shot, where an arm crosses the frame, at 4 frames a second: one arm in every sampled frame.</li>
+                <li>Capped Veo's own clip sound at -30 LUFS, with peaks under -12 dBFS, so a loud snap in one clip no longer jumps over the voice.</li>
               </ul>
             </div>
           </div>
@@ -312,11 +313,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <li>Lumaro Sparkling Calamansi.</li>
                 </ol>
               </details>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>Omni sometimes cuts to a new angle partway through a clip, so each shot only uses a stretch with no cut in it.</li>
-                <li>When the tab pops, the can shrinks by about a fifth. That shot ends right on the crack.</li>
-                <li>The first on-screen line, "Made with real calamansi juice", ran across the can. Claude Code trimmed it to "Real calamansi."</li>
+                <li>Used only a cut-free stretch of each clip, since Omni sometimes cuts to a new angle partway through.</li>
+                <li>Ended the tab shot right on the crack, before the can shrinks by about a fifth.</li>
+                <li>Cut the first on-screen line from "Made with real calamansi juice" to "Real calamansi." so it no longer runs across the can.</li>
               </ul>
             </div>
           </div>
@@ -342,10 +343,10 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <a href="media/stills/kalan-jar.jpg"><img src="media/stills/kalan-jar-thumb.jpg" width="280" height="280" loading="lazy" alt="A jar of chili garlic crisp with a black lid on a wooden counter"></a>
                 </div>
               </figure>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>Captions stay out of the top 14% and the bottom 35% of the frame, where Reels and Stories put the account name and buttons. They also stay inside the middle part that Facebook Feed shows.</li>
-                <li>In the spoon shot the jar loses its lid with nobody touching it, so the edit uses a later stretch of that clip.</li>
+                <li>Kept the captions out of the top 14% and the bottom 35% of the frame, where Reels and Stories put the account name and buttons, and inside the middle part that Facebook Feed shows.</li>
+                <li>Used a later stretch of the spoon shot, after the jar loses its lid with nobody touching it.</li>
               </ul>
             </div>
           </div>
@@ -371,11 +372,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <a href="media/stills/dapit-candle.jpg"><img src="media/stills/dapit-candle-thumb.jpg" width="280" height="280" loading="lazy" alt="A terracotta soy candle with a wooden wick on a wooden table"></a>
                 </div>
               </figure>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>The opening shot shows the steady flame, not the lighting. In the clip the match showed up already burnt out, and the flame lit before it touched the wick.</li>
-                <li>The third shot's first take had a thicker wick than the first shot, so Veo made it again from a corrected prompt.</li>
-                <li>The titles sit on a soft dark gradient, because white type on cream wax was hard to read.</li>
+                <li>Opened on the steady flame instead of the lighting: in the clip the match showed up already burnt out, and the flame lit before it touched the wick.</li>
+                <li>Remade the third shot from a corrected prompt after its first take had a thicker wick than the first shot's.</li>
+                <li>Set the titles on a soft dark gradient, because white type on cream wax was hard to read.</li>
               </ul>
             </div>
           </div>
@@ -402,11 +403,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <a href="media/stills/tamis-jar-wide.jpg"><img src="media/stills/tamis-jar-wide-thumb.jpg" width="280" height="156" loading="lazy" alt="The same clay jar, small and low in a wide frame"></a>
                 </div>
               </figure>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>Halfway through the spreading shot, the clip shatters into tiles and jumps to a new scene. The edit keeps only the clean second half.</li>
-                <li>After the lid pops off in the first shot, a second lid shows up next to the jar, so that shot ends just before it does.</li>
-                <li>Veo copied the framing of the jar still it was given, which put the end title on the lid. Twice. A wider still with the jar low in the frame fixed it on the third take.</li>
+                <li>Kept only the clean second half of the spreading shot, after the clip shatters into tiles and jumps to a new scene halfway through.</li>
+                <li>Ended the first shot just before a second lid shows up next to the jar, once the first one has popped off.</li>
+                <li>Gave Veo a wider still with the jar low in the frame for the end shot. Veo copies the framing of the still it gets, and the first two takes put the end title on the lid.</li>
               </ul>
             </div>
           </div>
@@ -417,10 +418,10 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
         <div class="tab" aria-hidden="true"><span class="shape tall"></span></div>
         <div class="paper">
           <h3 id="habi" class="rise">Habi Rattan Bag</h3>
-          <p class="spec">15 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
-          <div class="cut" role="img" aria-label="The edit: four shots of 3.25 to 4.25 seconds"><i style="--s:4.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:4"></i></div>
+          <p class="spec">13 seconds · 9:16 for Reels and Stories, with a 4:5 cut for Feed</p>
+          <div class="cut" role="img" aria-label="The edit: four shots of 2.9 to 4 seconds"><i style="--s:4"></i><i style="--s:2.875"></i><i style="--s:3.5"></i><i style="--s:3"></i></div>
           <div class="body">
-            <video class="rise" src="media/habi.mp4" poster="media/habi.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Habi Rattan Bag ad, 15 seconds, vertical, creator-style"></video>
+            <video class="rise" src="media/habi.mp4" poster="media/habi.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Habi Rattan Bag ad, 13 seconds, vertical, creator-style"></video>
             <div class="about rise">
               <h4>From the brief</h4>
               <p>It's handwoven. A phone, wallet and keys fit inside. It goes with everything.</p>
@@ -441,11 +442,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <li>Handwoven, and it goes with everything.</li>
                 </ol>
               </details>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>Veo made the phone shot twice. The first take turned the round bag into a half-moon with a leather flap.</li>
-                <li>Veo paced the lines its own way: a pause before "bag", and a long one before "it all fits". A Whisper transcript gave the timing of every word, so every cut falls between words. The phone shot ends before "it all fits", and its caption just says "Phone, wallet, keys."</li>
-                <li>Veo made the end shot again from further back. In the first take, the peg and the top of the strap sat right where the brand name goes.</li>
+                <li>Remade the phone shot after the first take turned the round bag into a half-moon with a leather flap.</li>
+                <li>Cut every line on word timings from a Whisper transcript, since Veo paced the lines its own way: a pause before "bag", and a long one before "it all fits". Every cut falls between words, and the phone shot ends before "it all fits", so its caption just says "Phone, wallet, keys."</li>
+                <li>Remade the end shot from further back. In the first take, the peg and the top of the strap sat right where the brand name goes.</li>
               </ul>
             </div>
           </div>
@@ -482,11 +483,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <li>It'll warm you up, Apo.</li>
                 </ol>
               </details>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>Veo put a third hand in the pouring shot, and Claude Code's review missed it because it only looked at about one frame a second. The second take did the same once the kettle came in. So the shot now ends on the spoonful, before the kettle, and the grandmother's line stops at "One spoonful."</li>
-                <li>In the last shot Veo threw in two lines that weren't in the script, "Smells good, Lola" and "It'll warm you up, Apo". Both stayed. The second is what the brief wanted the ad to say anyway, and it makes no health claim.</li>
-                <li>Flow Music can split a track into stems. The first track for this ad had something in its vocal stem from 16 seconds on, which could have been a voice or just the cello. Claude Code swapped in a second take whose vocal stem is silent apart from one faint blip.</li>
+                <li>Ended the pouring shot on the spoonful, before the kettle comes in, after both takes put a third hand in the shot. The grandmother's line now stops at "One spoonful." The first frame review looked at about one frame a second and missed the hand, so frame reviews now run at 4 frames a second.</li>
+                <li>Kept two lines Veo added to the last shot that weren't in the script, "Smells good, Lola" and "It'll warm you up, Apo", after checking them against the brief. The second is what the brief wanted the ad to say anyway, and it makes no health claim.</li>
+                <li>Swapped in a second music take after Flow Music's stem split found something in the first track's vocal stem from 16 seconds on, either a voice or the cello. The new take's vocal stem is silent apart from one faint blip.</li>
               </ul>
             </div>
           </div>
@@ -521,11 +522,11 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <li>Sabaw Supreme!</li>
                 </ol>
               </details>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>The first clip says the brand name at the start and the claim a few seconds later. The edit keeps the claim and saves the brand name for the end.</li>
-                <li>The cooking shot dissolves to the kettle partway through. That stayed in, since a dissolve suits a 90s spot.</li>
-                <li>The end shot stops at four and a half seconds, before a snap zoom that would push the pouch under the brand name.</li>
+                <li>Kept only the claim from the first clip, which also says the brand name a few seconds earlier, and saved the brand name for the end.</li>
+                <li>Kept the dissolve to the kettle partway through the cooking shot, since a dissolve suits a 90s spot.</li>
+                <li>Stopped the end shot at four and a half seconds, before a snap zoom pushes the pouch under the brand name.</li>
               </ul>
             </div>
           </div>
@@ -536,29 +537,29 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
         <div class="tab" aria-hidden="true"><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span><span class="shape tall"></span></div>
         <div class="paper">
           <h3 id="sigla" class="rise">Sigla Wellness</h3>
-          <p class="spec">A series of five Reels, 30 to 90 seconds · 9:16 for Reels and Stories, with 4:5 cuts for Feed</p>
-          <div class="cut" role="img" aria-label="The edits of the five Reels, one after another: 42 shots, 255 seconds in all">
-            <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i></span>
-            <span style="--s:45"><i style="--s:5"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:5"></i></span>
-            <span style="--s:30"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:4"></i><i style="--s:5"></i></span>
-            <span style="--s:90"><i style="--s:9.25"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5.75"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5"></i><i style="--s:10"></i><i style="--s:7.5"></i></span>
-            <span style="--s:60"><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:4"></i></span>
+          <p class="spec">A series of five Reels, 22 to 37 seconds · 9:16 for Reels and Stories, with 4:5 cuts for Feed</p>
+          <div class="cut" role="img" aria-label="The edits of the five Reels, one after another: 42 shots, about 135 seconds in all">
+            <span style="--s:24.75"><i style="--s:3"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:2.75"></i><i style="--s:3"></i></span>
+            <span style="--s:23.25"><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:3.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:3.5"></i><i style="--s:3"></i></span>
+            <span style="--s:21.5"><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3"></i></span>
+            <span style="--s:36.5"><i style="--s:2.75"></i><i style="--s:3.5"></i><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:2"></i><i style="--s:3"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:4"></i><i style="--s:3"></i></span>
+            <span style="--s:28.5"><i style="--s:3.5"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3.5"></i><i style="--s:3.5"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i></span>
           </div>
           <div class="body">
-            <video id="sigla-player" class="rise" src="media/sigla-breathing.mp4" poster="media/sigla-breathing.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Sigla Wellness, box breathing Reel, 30 seconds, vertical"></video>
+            <video id="sigla-player" class="rise" src="media/sigla-breathing.mp4" poster="media/sigla-breathing.jpg" width="720" height="1280" muted loop playsinline controls preload="none" aria-label="Sigla Wellness, box breathing Reel, 25 seconds, vertical"></video>
             <div class="about rise">
               <h4>From the brief</h4>
-              <p>A wellness page from Baguio posts short how-to Reels for people who follow health content on their phones. Each one shows one everyday habit, a step per shot, and makes no health claims: no cures, no calories, no hours of sleep.</p>
+              <p>The brief is for a fictional wellness page in Baguio, with short how-to Reels for phone viewers. Each one shows an everyday habit, a step per shot. The brief excludes claims about cures, calories or sleep outcomes.</p>
               <h4>The five Reels</h4>
               <ol class="reels">
-                <li><a href="media/sigla-breathing.mp4" aria-current="true" data-poster="media/sigla-breathing.jpg" data-label="Sigla Wellness, box breathing Reel, 30 seconds, vertical">Box breathing <small>30 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:5"></i></span></a></li>
-                <li><a href="media/sigla-desk.mp4" data-poster="media/sigla-desk.jpg" data-label="Sigla Wellness, desk stretch Reel, 45 seconds, vertical">A stretch break at the desk <small>45 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:5"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:5"></i></span></a></li>
-                <li><a href="media/sigla-water.mp4" data-poster="media/sigla-water.jpg" data-label="Sigla Wellness, water Reel, 30 seconds, vertical">Water you'll actually drink <small>30 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:5"></i><i style="--s:4"></i><i style="--s:5"></i></span></a></li>
-                <li><a href="media/sigla-wind-down.mp4" data-poster="media/sigla-wind-down.jpg" data-label="Sigla Wellness, evening wind-down Reel, 90 seconds, vertical">Winding down at night <small>90 s · 12 shots</small><span class="cut" aria-hidden="true"><i style="--s:9.25"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5.75"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:7.5"></i><i style="--s:5"></i><i style="--s:10"></i><i style="--s:7.5"></i></span></a></li>
-                <li><a href="media/sigla-walk.mp4" data-poster="media/sigla-walk.jpg" data-label="Sigla Wellness, morning walk Reel, 60 seconds, vertical">A walk before the phone <small>60 s · 9 shots</small><span class="cut" aria-hidden="true"><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:7"></i><i style="--s:4"></i></span></a></li>
+                <li><a href="media/sigla-breathing.mp4" aria-current="true" data-poster="media/sigla-breathing.jpg" data-label="Sigla Wellness, box breathing Reel, 25 seconds, vertical">Box breathing <small>25 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:3"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:4"></i><i style="--s:2.75"></i><i style="--s:3"></i></span></a></li>
+                <li><a href="media/sigla-desk.mp4" data-poster="media/sigla-desk.jpg" data-label="Sigla Wellness, desk stretch Reel, 23 seconds, vertical">A stretch break at the desk <small>23 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:3.25"></i><i style="--s:3.25"></i><i style="--s:3.5"></i><i style="--s:3.5"></i><i style="--s:3"></i></span></a></li>
+                <li><a href="media/sigla-water.mp4" data-poster="media/sigla-water.jpg" data-label="Sigla Wellness, water Reel, 22 seconds, vertical">Water you'll actually drink <small>22 s · 7 shots</small><span class="cut" aria-hidden="true"><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3"></i></span></a></li>
+                <li><a href="media/sigla-wind-down.mp4" data-poster="media/sigla-wind-down.jpg" data-label="Sigla Wellness, evening wind-down Reel, 37 seconds, vertical">Winding down at night <small>37 s · 12 shots</small><span class="cut" aria-hidden="true"><i style="--s:2.75"></i><i style="--s:3.5"></i><i style="--s:3"></i><i style="--s:3.25"></i><i style="--s:2"></i><i style="--s:3"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:4"></i><i style="--s:3"></i></span></a></li>
+                <li><a href="media/sigla-walk.mp4" data-poster="media/sigla-walk.jpg" data-label="Sigla Wellness, morning walk Reel, 29 seconds, vertical">A walk before the phone <small>29 s · 9 shots</small><span class="cut" aria-hidden="true"><i style="--s:3.5"></i><i style="--s:2.75"></i><i style="--s:3.25"></i><i style="--s:3"></i><i style="--s:3.5"></i><i style="--s:3.5"></i><i style="--s:3"></i><i style="--s:3"></i><i style="--s:3"></i></span></a></li>
               </ol>
               <h4>How it was made</h4>
-              <p>Most clips are Veo 3.1 Lite from Google Flow, each started from a Nano Banana still so the person, or the pitcher, looks the same in every shot. Flow's credits ran out after 38 clips, so Gemini Omni made the shots that need no still in the Gemini app, about five every five hours. Nobody talks: a caption carries each step, so it all works with the sound off.</p>
+              <p>Most clips are Veo 3.1 Lite from Google Flow, each started from a Nano Banana still so the person, or the pitcher, looks the same in every shot. Flow's credits ran out after 38 clips, so Gemini Omni made the shots that need no still in the Gemini app, about five every five hours. Nobody talks: a caption carries each step, so it all works with the sound off. Each shot lasts about as long as its caption takes to read, except in the breathing Reel, where each count of 4 gets a 4-second shot.</p>
               <figure class="stills">
                 <figcaption>The five stills, made by Nano Banana 2.1 in Flow, one for each Reel.</figcaption>
                 <div>
@@ -569,13 +570,13 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
                   <a href="media/stills/sigla-walk.jpg"><img src="media/stills/sigla-walk-thumb.jpg" width="280" height="502" loading="lazy" alt="A woman in a green jacket standing on a cabin porch among misty pines"></a>
                 </div>
               </figure>
-              <h4>What went wrong</h4>
+              <h4>Checks and fixes</h4>
               <ul>
-                <li>All five end on the same sunrise over the ridges. Played forward, the camera drifted a pine tree right through the page name, so the picture plays backwards. The wind and birds still run forwards.</li>
-                <li>In the tea shot, Gemini Omni moved the kettle from one side of the mug to the other in the middle of the pour. The wind-down Reel picks the shot up after the jump.</li>
-                <li>The bedside lamp goes out, then the room lights itself back up. That shot ends while it's still dark.</li>
-                <li>An ice cube dives into the glass and the rest jump around, so the water Reel's first shot starts once they settle.</li>
-                <li>Flow Music's stem split put something in the vocal stem for the first 15 seconds of the breathing track. It's most likely the soft pad split in two, but nobody has listened to check, so that Reel uses the track from 16 seconds on.</li>
+                <li>Played the sunrise that ends all five Reels backwards. Played forward, the camera drifted a pine tree right through the page name.</li>
+                <li>Picked up the tea shot after the jump: in the middle of the pour, Gemini Omni moved the kettle from one side of the mug to the other.</li>
+                <li>Ended the lamp shot while the room is still dark. After the bedside lamp goes out, the room lights itself back up.</li>
+                <li>Started the water Reel's first shot once the ice settles, after one cube dives into the glass and the rest jump around.</li>
+                <li>Started the breathing Reel's music at 16 seconds, because Flow Music's stem split put audio in the vocal stem for the first 15.</li>
               </ul>
             </div>
           </div>
@@ -588,7 +589,7 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
     <div class="process-grid">
       <div class="process-head">
         <h2 id="process-h" class="rise">How each ad gets made</h2>
-        <p class="rise">The same run for every video here, from a one&#8209;page brief to a render in DaVinci Resolve. The right-hand column names the tool or model that does each step.</p>
+        <p class="rise">The production workflow, from a one&#8209;page brief to a render in DaVinci Resolve. Individual notes record the model choices and exceptions. The right-hand column names the tool or model for each step.</p>
       </div>
       <div class="slip rise">
         <h3>The brief</h3>
@@ -600,13 +601,13 @@ footer { width: var(--inner); margin: 0 auto calc(var(--m) * 2); padding-top: 50
         <h3>The clips</h3>
         <dl>
           <div><dt>Stills of the product and the people, to keep them looking the same from shot to shot</dt><dd>Nano Banana 2.1, mostly</dd></div>
-          <div><dt>Each shot, with a still attached</dt><dd>Veo 3.1 or Gemini Omni</dd></div>
-          <div><dt>Word timings when Veo speaks a line, so every cut lands between words</dt><dd>Whisper</dd></div>
+          <div><dt>Generated shots, using reference stills where supported</dt><dd>Veo 3.1 or Gemini Omni</dd></div>
+          <div><dt>Word timings for spoken lines, used to place cuts between words</dt><dd>Whisper</dd></div>
         </dl>
         <h3>The checks</h3>
         <dl>
-          <div><dt>Throws out clips with black frames, freezes, or the wrong length or shape, and flags cuts hidden inside a clip</dt><dd>The script</dd></div>
-          <div><dt>Goes through frames from every clip for bad hands and faces, garbled text, objects that change shape and physics that look off, and logs it as an AI review</dt><dd>Claude Code</dd></div>
+          <div><dt>Checks for black or frozen frames, expected length and shape, and cuts within a clip</dt><dd>The script</dd></div>
+          <div><dt>Reviews sampled frames for hands, faces, text, changing objects and implausible motion. Generation errors may still be missed</dt><dd>Claude Code</dd></div>
         </dl>
         <h3>The finish</h3>
         <dl>
@@ -672,7 +673,22 @@ const watch = new IntersectionObserver(entries => entries.forEach(({ target, isI
 document.querySelectorAll('video').forEach(video => {
   video.addEventListener('pause', () => { if (video.dataset.auto) delete video.dataset.auto; else held.add(video); });
   video.addEventListener('play', () => held.delete(video));
+  video.addEventListener('error', () => {
+    const about = video.parentElement.querySelector('.about');
+    about.querySelector('.media-error')?.remove();
+    const status = Object.assign(document.createElement('p'), { className: 'media-error' });
+    status.setAttribute('role', 'status');
+    const link = Object.assign(document.createElement('a'), { href: video.src, textContent: 'Open the video file' });
+    status.append('The video could not load. ', link, '. Check your connection and try again.');
+    about.prepend(status);
+  });
+  video.addEventListener('loadstart', () => video.parentElement.querySelector('.media-error')?.remove());
   watch.observe(video);
+});
+quiet.addEventListener('change', ({ matches }) => {
+  if (matches) document.querySelectorAll('video').forEach(video => {
+    if (!video.paused) { video.dataset.auto = '1'; video.pause(); }
+  });
 });
 
 // The series sheet has one player: picking a Reel loads it there and plays it. Without the script, each link opens its file.
